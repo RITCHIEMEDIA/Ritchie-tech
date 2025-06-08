@@ -51,7 +51,7 @@ export default function About() {
         <div className="max-w-4xl mx-auto space-y-12">
           {/* Header */}
           <div className="text-center space-y-4">
-            <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white">About Isaac Elishe</h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white">About Isaac Elisha</h1>
             <p className="text-xl text-slate-600 dark:text-slate-300">
               Full-Stack Developer | Computer Science Student | Tech Enthusiast
             </p>
@@ -67,7 +67,7 @@ export default function About() {
             </CardHeader>
             <CardContent className="space-y-4 text-slate-700 dark:text-slate-300 leading-relaxed">
               <p>
-                Hello! I'm Isaac Elishe, also known as Ritchie Tech in the development community. I'm a passionate
+                Hello! I'm Isaac Elisha, also known as Ritchie Tech in the development community. I'm a passionate
                 full-stack developer with a strong foundation in both front-end and back-end technologies, currently
                 pursuing my Bachelor of Science in Computer Science with an expected graduation in 2027.
               </p>

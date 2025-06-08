@@ -1,27 +1,33 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Github, Linkedin, Mail, ArrowRight } from "lucide-react"
+import { Github, Linkedin, Mail, ArrowRight, MessageCircle } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 
 export default function Home() {
+  // WhatsApp message - using correct WhatsApp URL format
+  const whatsappMessage = encodeURIComponent(
+    "Hello Isaac! I'm interested in learning more about your work and potentially collaborating on a project.",
+  )
+  const whatsappUrl = `https://wa.me/+2349079928298?text=${whatsappMessage}`
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
-      {/* Hero Section */}
       <section className="container mx-auto px-4 py-16 md:py-24">
         <div className="flex flex-col items-center text-center space-y-8">
           <div className="relative">
             <Image
-              src="/placeholder.svg?height=200&width=200"
+              src="/images/ritchie.jpg"
               alt="Isaac Elisha Profile"
               width={200}
               height={200}
-              className="rounded-full border-4 border-white shadow-xl"
+              className="rounded-full border-4 border-white border-solid shadow-xl object-cover"
+              priority
             />
           </div>
 
           <div className="space-y-4 max-w-3xl">
-            <h1 className="text-4xl md:text-6xl font-bold text-slate-900 dark:text-white">Isaac elisha</h1>
+            <h1 className="text-4xl md:text-6xl font-bold text-slate-900 dark:text-white">Isaac Elisha</h1>
             <p className="text-xl md:text-2xl text-blue-600 dark:text-blue-400 font-medium">Ritchie Tech</p>
             <p className="text-lg md:text-xl text-slate-600 dark:text-slate-300 leading-relaxed">
               Full-Stack Developer & Computer Science Student passionate about creating innovative web solutions and
@@ -58,6 +64,12 @@ export default function Home() {
               <Link href="mailto:isaac@ritchietech.com">
                 <Mail className="h-6 w-6" />
                 <span className="sr-only">Email</span>
+              </Link>
+            </Button>
+            <Button variant="ghost" size="icon" asChild>
+              <Link href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+                <MessageCircle className="h-6 w-6" />
+                <span className="sr-only">WhatsApp</span>
               </Link>
             </Button>
           </div>

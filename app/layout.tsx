@@ -9,6 +9,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://isaac-elisha.vercel.app"),
   title: {
     default: "Isaac Elisha - Full-Stack Developer",
     template: "%s | Isaac Elisha",
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://isaacelisha.dev",
+    url: "https://isaac-elisha.vercel.app",
     title: "Isaac Elisha - Full-Stack Developer",
     description:
       "Full-Stack Developer and Computer Science Student passionate about creating innovative web solutions.",
