@@ -1,7 +1,7 @@
 "use server"
 
-import { addProject, updateProject, deleteProject } from "@/lib/projects"
-import { revalidatePath } from "next/cache"
+import { addProject, updateProject, deleteProject, refreshProjectsCache } from "@/lib/projects"
+import { revalidatePath, revalidateTag } from "next/cache"
 
 export async function createProject(formData: FormData) {
   const title = formData.get("title") as string
@@ -15,6 +15,8 @@ export async function createProject(formData: FormData) {
   const githubUrl = formData.get("githubUrl") as string
   const date = formData.get("date") as string
   const featured = formData.get("featured") === "on"
+
+  console.log("Server: Creating project with title:", title)
 
   // Server-side validation
   if (!title || title.trim().length < 3) {
@@ -61,14 +63,20 @@ export async function createProject(formData: FormData) {
       featured,
     })
 
-    // Revalidate pages to show new project
+    console.log("Server: Project created successfully:", project.id)
+
+    // Force refresh cache
+    refreshProjectsCache()
+
+    // Revalidate all relevant pages
     revalidatePath("/projects")
     revalidatePath("/admin")
-    revalidatePath("/") // In case featured projects are shown on home
+    revalidatePath("/")
+    revalidateTag("projects")
 
     return { success: true, project }
   } catch (error) {
-    console.error("Error creating project:", error)
+    console.error("Server: Error creating project:", error)
     return { success: false, error: "Failed to create project. Please try again." }
   }
 }
@@ -85,6 +93,8 @@ export async function editProject(id: string, formData: FormData) {
   const githubUrl = formData.get("githubUrl") as string
   const date = formData.get("date") as string
   const featured = formData.get("featured") === "on"
+
+  console.log("Server: Updating project:", id)
 
   // Server-side validation (same as create)
   if (!title || title.trim().length < 3) {
@@ -115,19 +125,27 @@ export async function editProject(id: string, formData: FormData) {
       return { success: false, error: "Project not found" }
     }
 
-    // Revalidate pages to show updated project
+    console.log("Server: Project updated successfully:", project.id)
+
+    // Force refresh cache
+    refreshProjectsCache()
+
+    // Revalidate pages
     revalidatePath("/projects")
     revalidatePath("/admin")
     revalidatePath("/")
+    revalidateTag("projects")
 
     return { success: true, project }
   } catch (error) {
-    console.error("Error updating project:", error)
+    console.error("Server: Error updating project:", error)
     return { success: false, error: "Failed to update project. Please try again." }
   }
 }
 
 export async function removeProject(id: string) {
+  console.log("Server: Deleting project:", id)
+
   try {
     const success = deleteProject(id)
 
@@ -135,14 +153,20 @@ export async function removeProject(id: string) {
       return { success: false, error: "Project not found" }
     }
 
-    // Revalidate pages to remove deleted project
+    console.log("Server: Project deleted successfully:", id)
+
+    // Force refresh cache
+    refreshProjectsCache()
+
+    // Revalidate pages
     revalidatePath("/projects")
     revalidatePath("/admin")
     revalidatePath("/")
+    revalidateTag("projects")
 
     return { success: true }
   } catch (error) {
-    console.error("Error deleting project:", error)
+    console.error("Server: Error deleting project:", error)
     return { success: false, error: "Failed to delete project. Please try again." }
   }
 }

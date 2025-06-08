@@ -99,6 +99,8 @@ export function ProjectForm({ project, onSuccess, onCancel }: ProjectFormProps) 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
 
+    console.log("Form: Starting submission for project:", formData.title)
+
     if (!validateForm()) {
       setMessage({ type: "error", text: "Please fix the errors below" })
       return
@@ -121,12 +123,15 @@ export function ProjectForm({ project, onSuccess, onCancel }: ProjectFormProps) 
         submitData.append("featured", "on")
       }
 
+      console.log("Form: Calling server action...")
       const result = project ? await editProject(project.id, submitData) : await createProject(submitData)
+
+      console.log("Form: Server action result:", result)
 
       if (result.success) {
         setMessage({
           type: "success",
-          text: `Project ${project ? "updated" : "created"} successfully!`,
+          text: `Project "${formData.title}" ${project ? "updated" : "created"} successfully! 🎉`,
         })
 
         // Reset form if creating new project
@@ -143,14 +148,23 @@ export function ProjectForm({ project, onSuccess, onCancel }: ProjectFormProps) 
           })
         }
 
+        // Trigger storage event to notify other components
+        if (typeof window !== "undefined") {
+          window.dispatchEvent(new Event("projects-updated"))
+        }
+
         // Call success callback after a short delay
         setTimeout(() => {
-          if (onSuccess) onSuccess()
-        }, 1500)
+          if (onSuccess) {
+            console.log("Form: Calling onSuccess callback")
+            onSuccess()
+          }
+        }, 2000)
       } else {
         setMessage({ type: "error", text: result.error || "Something went wrong" })
       }
     } catch (error) {
+      console.error("Form: Error submitting project:", error)
       setMessage({ type: "error", text: "Failed to save project. Please try again." })
     } finally {
       setIsSubmitting(false)

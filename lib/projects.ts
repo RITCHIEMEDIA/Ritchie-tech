@@ -11,101 +11,104 @@ export interface Project {
   createdAt: Date
 }
 
+// Default projects that will always be available
+const defaultProjects: Project[] = [
+  {
+    id: "1",
+    title: "SWIFTX GLOBAL LOGISTICS",
+    description:
+      "A full-stack Logistics Management System that streamlines operations, from shipment tracking to invoicing, And a fully working Admin panel. Built with PHP, JS, CSS, and MYSQL.",
+    image: "https://swiftxglobal.infinityfreeapp.com/images/pexels-ethan-nguyen-63327081-9749472.jpg",
+    technologies: ["PHP", "HTML", "JS", "MYSQL", "CSS"],
+    liveUrl: "https://swiftxglobal.infinityfreeapp.com",
+    githubUrl: "",
+    date: "2023",
+    featured: true,
+    createdAt: new Date("2023-01-01"),
+  },
+  {
+    id: "2",
+    title: "Errand PLUS",
+    description:
+      "A collaborative Errand management application with real-time updates, Hiring of errand runners, becoming an errand runner ,and team collaboration features. Built with PHP, JS and CSS.",
+    image: "https://errandplus.org/assets/images/boxs.avif",
+    technologies: ["REACT", "Node.js", "PHP", "MYSQL", "Express"],
+    liveUrl: "https://errandplus.org",
+    githubUrl: "",
+    date: "2023",
+    featured: true,
+    createdAt: new Date("2023-02-01"),
+  },
+  {
+    id: "3",
+    title: "Weather Dashboard",
+    description:
+      "A responsive weather application that provides current weather conditions and forecasts. Features location-based weather data and interactive charts.",
+    image: "/placeholder.svg?height=300&width=400",
+    technologies: ["React", "Chart.js", "OpenWeather API", "CSS3"],
+    liveUrl: "https://weather-dashboard-demo.vercel.app",
+    githubUrl: "https://github.com/isaacelisha/weather-dashboard",
+    date: "2022",
+    featured: false,
+    createdAt: new Date("2022-01-01"),
+  },
+]
+
 // Check if we're in the browser
 const isBrowser = typeof window !== "undefined"
 
-// Initialize projects from localStorage or default data
-function initializeProjects(): Project[] {
-  if (isBrowser) {
-    const stored = localStorage.getItem("portfolio-projects")
-    if (stored) {
-      try {
-        const parsed = JSON.parse(stored)
-        // Convert createdAt strings back to Date objects
-        return parsed.map((project: any) => ({
-          ...project,
-          createdAt: new Date(project.createdAt),
-        }))
-      } catch (error) {
-        console.error("Error parsing stored projects:", error)
-      }
-    }
+// Get projects from localStorage with fallback to defaults
+function getStoredProjects(): Project[] {
+  if (!isBrowser) {
+    return defaultProjects
   }
 
-  // Default projects if no stored data
-  return [
-    {
-      id: "1",
-      title: "SWIFTX GLOBAL LOGISTICS",
-      description:
-        "A full-stack Logistics Management System that streamlines operations, from shipment tracking to invoicing, And a fully working Admin panel. Built with PHP, JS, CSS, and MYSQL.",
-      image: "https://swiftxglobal.infinityfreeapp.com/images/pexels-ethan-nguyen-63327081-9749472.jpg",
-      technologies: ["PHP", "HTML", "JS", "MYSQL", " CSS"],
-      liveUrl: "https://swiftxglobal.infinityfreeapp.com",
-      githubUrl: "",
-      date: "2023",
-      featured: true,
-      createdAt: new Date("2023-01-01"),
-    },
-    {
-      id: "2",
-      title: "Errand PLUS",
-      description:
-        "A collaborative Errand management application with real-time updates, Hiring of errand runners, becoming an errand runner ,and team collaboration features. Built with PHP, JS and CSS.",
-      image: "https://errandplus.org/assets/images/boxs.avif",
-      technologies: ["REACT", "Node.js", "PHP", "MYSQL", "Express"],
-      liveUrl: "https://errandplus.org",
-      githubUrl: "",
-      date: "2025",
-      featured: true,
-      createdAt: new Date("2023-02-01"),
-    },
-    {
-      id: "3",
-      title: "Weather Dashboard",
-      description:
-        "A responsive weather application that provides current weather conditions and forecasts. Features location-based weather data and interactive charts.",
-      image: "/placeholder.svg?height=300&width=400",
-      technologies: ["React", "Chart.js", "OpenWeather API", "CSS3"],
-      liveUrl: "https://weather-dashboard-demo.vercel.app",
-      githubUrl: "https://github.com/isaacelisha/weather-dashboard",
-      date: "2022",
-      featured: false,
-      createdAt: new Date("2022-01-01"),
-    },
-  ]
-}
+  try {
+    const stored = localStorage.getItem("portfolio-projects")
+    if (stored) {
+      const parsed = JSON.parse(stored)
+      // Convert createdAt strings back to Date objects and merge with defaults
+      const storedProjects = parsed.map((project: any) => ({
+        ...project,
+        createdAt: new Date(project.createdAt),
+      }))
 
-// Global projects array
-let projects: Project[] = initializeProjects()
+      // Merge stored projects with defaults, avoiding duplicates
+      const allProjects = [...storedProjects]
+      defaultProjects.forEach((defaultProject) => {
+        if (!storedProjects.find((p) => p.id === defaultProject.id)) {
+          allProjects.push(defaultProject)
+        }
+      })
+
+      return allProjects
+    }
+  } catch (error) {
+    console.error("Error parsing stored projects:", error)
+  }
+
+  return defaultProjects
+}
 
 // Save projects to localStorage
-function saveProjects() {
-  if (isBrowser) {
-    try {
-      localStorage.setItem("portfolio-projects", JSON.stringify(projects))
-    } catch (error) {
-      console.error("Error saving projects to localStorage:", error)
-    }
+function saveProjects(projects: Project[]) {
+  if (!isBrowser) return
+
+  try {
+    localStorage.setItem("portfolio-projects", JSON.stringify(projects))
+    console.log("Projects saved to localStorage:", projects.length)
+  } catch (error) {
+    console.error("Error saving projects to localStorage:", error)
   }
 }
 
+// Global projects state
+let projectsCache: Project[] | null = null
+
 export function getProjects(): Project[] {
-  // Always get fresh data from localStorage if available
-  if (isBrowser) {
-    const stored = localStorage.getItem("portfolio-projects")
-    if (stored) {
-      try {
-        const parsed = JSON.parse(stored)
-        projects = parsed.map((project: any) => ({
-          ...project,
-          createdAt: new Date(project.createdAt),
-        }))
-      } catch (error) {
-        console.error("Error parsing stored projects:", error)
-      }
-    }
-  }
+  // Always get fresh data from localStorage in browser
+  const projects = getStoredProjects()
+  projectsCache = projects
   return projects.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
 }
 
@@ -120,46 +123,76 @@ export function getProject(id: string): Project | undefined {
 export function addProject(project: Omit<Project, "id" | "createdAt">): Project {
   const newProject: Project = {
     ...project,
-    id: Date.now().toString(),
+    id: `project-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
     createdAt: new Date(),
   }
 
   // Get current projects and add new one
-  const currentProjects = getProjects()
-  projects = [newProject, ...currentProjects]
-  saveProjects()
+  const currentProjects = getStoredProjects()
+  const updatedProjects = [newProject, ...currentProjects]
 
-  console.log("Project added:", newProject)
-  console.log("Total projects:", projects.length)
+  // Save to localStorage
+  saveProjects(updatedProjects)
+
+  // Update cache
+  projectsCache = updatedProjects
+
+  console.log("Project added successfully:", newProject.title)
+  console.log("Total projects after addition:", updatedProjects.length)
 
   return newProject
 }
 
 export function updateProject(id: string, updates: Partial<Project>): Project | null {
-  const currentProjects = getProjects()
+  const currentProjects = getStoredProjects()
   const index = currentProjects.findIndex((project) => project.id === id)
-  if (index === -1) return null
+
+  if (index === -1) {
+    console.error("Project not found for update:", id)
+    return null
+  }
 
   currentProjects[index] = { ...currentProjects[index], ...updates }
-  projects = currentProjects
-  saveProjects()
+  saveProjects(currentProjects)
+  projectsCache = currentProjects
 
+  console.log("Project updated successfully:", currentProjects[index].title)
   return currentProjects[index]
 }
 
 export function deleteProject(id: string): boolean {
-  const currentProjects = getProjects()
+  const currentProjects = getStoredProjects()
   const index = currentProjects.findIndex((project) => project.id === id)
-  if (index === -1) return false
 
+  if (index === -1) {
+    console.error("Project not found for deletion:", id)
+    return false
+  }
+
+  const deletedProject = currentProjects[index]
   currentProjects.splice(index, 1)
-  projects = currentProjects
-  saveProjects()
+  saveProjects(currentProjects)
+  projectsCache = currentProjects
 
+  console.log("Project deleted successfully:", deletedProject.title)
   return true
 }
 
-// Initialize projects on module load
+// Force refresh projects cache
+export function refreshProjectsCache(): void {
+  projectsCache = null
+  if (isBrowser) {
+    // Trigger a storage event to notify other components
+    window.dispatchEvent(new Event("projects-updated"))
+  }
+}
+
+// Initialize projects on module load (browser only)
 if (isBrowser) {
-  projects = initializeProjects()
+  // Ensure default projects are always available
+  const stored = localStorage.getItem("portfolio-projects")
+  if (!stored) {
+    console.log("Initializing default projects...")
+    saveProjects(defaultProjects)
+  }
 }

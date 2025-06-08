@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { ExternalLink, Github, Calendar } from "lucide-react"
+import { ExternalLink, Github, Calendar, RefreshCw } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { getProjects, getFeaturedProjects } from "@/lib/projects"
@@ -13,18 +13,53 @@ export default function Projects() {
   const [projects, setProjects] = useState<any[]>([])
   const [featuredProjects, setFeaturedProjects] = useState<any[]>([])
   const [isLoading, setIsLoading] = useState(true)
+  const [lastUpdated, setLastUpdated] = useState<Date>(new Date())
+
+  function loadProjects() {
+    console.log("Projects page: Loading projects...")
+    setIsLoading(true)
+
+    try {
+      const allProjects = getProjects()
+      const featured = getFeaturedProjects()
+
+      console.log("Projects page: Loaded", allProjects.length, "total projects")
+      console.log("Projects page: Loaded", featured.length, "featured projects")
+
+      setProjects(allProjects)
+      setFeaturedProjects(featured)
+      setLastUpdated(new Date())
+    } catch (error) {
+      console.error("Projects page: Error loading projects:", error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   useEffect(() => {
-    // Load projects on client side to get fresh data
-    const allProjects = getProjects()
-    const featured = getFeaturedProjects()
-    const otherProjects = allProjects.filter((project) => !project.featured)
+    // Initial load
+    loadProjects()
 
-    setProjects(allProjects)
-    setFeaturedProjects(featured)
-    setIsLoading(false)
+    // Listen for storage events (when projects are updated)
+    function handleStorageChange() {
+      console.log("Projects page: Storage changed, reloading projects...")
+      loadProjects()
+    }
 
-    console.log("Projects page loaded - Total:", allProjects.length, "Featured:", featured.length)
+    function handleProjectsUpdated() {
+      console.log("Projects page: Projects updated event received")
+      setTimeout(loadProjects, 100) // Small delay to ensure localStorage is updated
+    }
+
+    // Listen for custom events
+    window.addEventListener("projects-updated", handleProjectsUpdated)
+    window.addEventListener("storage", handleStorageChange)
+
+    // Cleanup
+    return () => {
+      window.removeEventListener("projects-updated", handleProjectsUpdated)
+      window.removeEventListener("storage", handleStorageChange)
+    }
   }, [])
 
   // WhatsApp message - using correct WhatsApp URL format
@@ -52,13 +87,28 @@ export default function Projects() {
         <div className="max-w-6xl mx-auto space-y-12">
           {/* Header */}
           <div className="text-center space-y-4">
-            <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white">My Projects</h1>
+            <div className="flex items-center justify-center gap-4">
+              <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white">My Projects</h1>
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={loadProjects}
+                className="shrink-0"
+                title="Refresh projects"
+              >
+                <RefreshCw className="h-4 w-4" />
+              </Button>
+            </div>
             <p className="text-xl text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
               A collection of projects showcasing my skills in full-stack development, from concept to deployment.
             </p>
-            <p className="text-sm text-slate-500 dark:text-slate-400">
-              Total Projects: {projects.length} | Featured: {featuredProjects.length}
-            </p>
+            <div className="flex items-center justify-center gap-4 text-sm text-slate-500 dark:text-slate-400">
+              <span>Total Projects: {projects.length}</span>
+              <span>•</span>
+              <span>Featured: {featuredProjects.length}</span>
+              <span>•</span>
+              <span>Last Updated: {lastUpdated.toLocaleTimeString()}</span>
+            </div>
           </div>
 
           {/* Featured Projects */}
