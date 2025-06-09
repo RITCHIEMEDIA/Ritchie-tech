@@ -54,9 +54,22 @@ const defaultProjects: Project[] = [
   },
     {
     id: "4",
-    title: "Bible quiz",
+    title: "a Bible quiz",
     description:
       "a Bible quiz application that allows users to test their knowledge of the Bible through multiple-choice questions. It features a user-friendly interface, score tracking, and a variety of quizzes covering different books and themes of the Bible.",
+    image: "images/image.png",
+    technologies: ["React", "Typescript", "Nextjs", "Tailwind Css"],
+    liveUrl: "https://isaac-bible-quiz.vercel.app",
+    githubUrl: "",
+    date: "2025",
+    featured: true,
+    createdAt: new Date("2025-06-08"),
+  },
+    {
+    id: "5",
+    title: "Cervical Cancer Diagnosis",
+    description:
+      "A medical Site that works with Ai to diagnose and provide information on cervical cancer. It uses Exper system algorithms to analyze user inputs and provide accurate diagnoses and recommendations.",
     image: "images/image.png",
     technologies: ["React", "Typescript", "Nextjs", "Tailwind Css"],
     liveUrl: "https://isaac-bible-quiz.vercel.app",
