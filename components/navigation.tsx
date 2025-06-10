@@ -5,7 +5,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
-import { Menu, X } from "lucide-react"
+import { Menu, X, MessageSquare } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export default function Navigation() {
@@ -16,7 +16,12 @@ export default function Navigation() {
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
     { name: "Projects", href: "/projects" },
+    { name: "Contact", href: "/contact" },
   ]
+
+  // WhatsApp number
+  const whatsappNumber = "2349079928298"
+  const whatsappUrl = `https://wa.me/${whatsappNumber}`
 
   return (
     <nav className="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 border-solid dark:border-slate-700">
@@ -45,11 +50,23 @@ export default function Navigation() {
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-2">
+            <Button size="sm" variant="outline" asChild className="text-sm">
+              <Link href={whatsappUrl} target="_blank">
+                <MessageSquare className="h-4 w-4 mr-1" />
+                Chat
+              </Link>
+            </Button>
             <ThemeToggle />
           </div>
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center space-x-2">
+            <Button size="sm" variant="outline" asChild className="text-sm">
+              <Link href={whatsappUrl} target="_blank">
+                <MessageSquare className="h-4 w-4" />
+                <span className="sr-only">WhatsApp</span>
+              </Link>
+            </Button>
             <ThemeToggle />
             <Button variant="ghost" size="icon" onClick={() => setIsOpen(!isOpen)}>
               {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -75,6 +92,15 @@ export default function Navigation() {
                 {item.name}
               </Link>
             ))}
+            <Link
+              href={whatsappUrl}
+              target="_blank"
+              className="flex items-center gap-2 px-3 py-2 text-base font-medium rounded-md transition-colors bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400"
+              onClick={() => setIsOpen(false)}
+            >
+              <MessageSquare className="h-4 w-4" />
+              Chat on WhatsApp
+            </Link>
           </div>
         )}
       </div>

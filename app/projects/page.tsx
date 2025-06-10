@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { ExternalLink, Github, Calendar, RefreshCw } from "lucide-react"
+import { ExternalLink, Github, Calendar, RefreshCw, MessageCircle } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { getProjects, getFeaturedProjects } from "@/lib/projects"
@@ -14,6 +14,9 @@ export default function Projects() {
   const [featuredProjects, setFeaturedProjects] = useState<any[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [lastUpdated, setLastUpdated] = useState<Date>(new Date())
+
+  // WhatsApp number
+  const whatsappNumber = "2349079928298"
 
   function loadProjects() {
     console.log("Projects page: Loading projects...")
@@ -66,7 +69,7 @@ export default function Projects() {
   const whatsappMessage = encodeURIComponent(
     "Hello Isaac! I'm interested in discussing a potential project collaboration. I saw your portfolio and would love to connect with you.",
   )
-  const whatsappUrl = `https://wa.me/+2349079928298?text=${whatsappMessage}`
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`
 
   if (isLoading) {
     return (
@@ -251,29 +254,28 @@ export default function Projects() {
           )}
 
           {/* Call to Action */}
-          {projects.length > 0 && (
-            <section className="text-center py-12">
-              <Card className="max-w-2xl mx-auto">
-                <CardContent className="p-8 space-y-4">
-                  <h3 className="text-2xl font-bold text-slate-900 dark:text-white">Interested in Working Together?</h3>
-                  <p className="text-slate-600 dark:text-slate-300">
-                    I'm always open to discussing new opportunities and exciting projects. Let's connect and see how we
-                    can create something amazing together.
-                  </p>
-                  <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                    <Button asChild>
-                      <Link href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-                        Get In Touch
-                      </Link>
-                    </Button>
-                    <Button variant="outline" asChild>
-                      <Link href="/about">Learn More About Me</Link>
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            </section>
-          )}
+          <section className="text-center py-12">
+            <Card className="max-w-2xl mx-auto">
+              <CardContent className="p-8 space-y-4">
+                <h3 className="text-2xl font-bold text-slate-900 dark:text-white">Interested in Working Together?</h3>
+                <p className="text-slate-600 dark:text-slate-300">
+                  I'm always open to discussing new opportunities and exciting projects. Let's connect and see how we
+                  can create something amazing together.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                  <Button asChild>
+                    <Link href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+                      <MessageCircle className="h-4 w-4 mr-2" />
+                      Chat on WhatsApp
+                    </Link>
+                  </Button>
+                  <Button variant="outline" asChild>
+                    <Link href="/contact">Contact Me</Link>
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </section>
         </div>
       </div>
     </div>

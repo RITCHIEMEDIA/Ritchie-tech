@@ -1,18 +1,34 @@
+"use client"
+
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Github, Linkedin, Mail, ArrowRight, MessageCircle } from "lucide-react"
+import { Github, Linkedin, Mail, ArrowRight, MessageCircle, Phone } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
+import { getFeaturedProjects } from "@/lib/projects"
 
 export default function Home() {
+  const [featuredProjects, setFeaturedProjects] = useState<any[]>([])
+
+  // WhatsApp number
+  const whatsappNumber = "2349079928298"
+
   // WhatsApp message - using correct WhatsApp URL format
   const whatsappMessage = encodeURIComponent(
     "Hello Isaac! I'm interested in learning more about your work and potentially collaborating on a project.",
   )
-  const whatsappUrl = `https://wa.me/+2349079928298?text=${whatsappMessage}`
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`
+
+  useEffect(() => {
+    // Load featured projects on client side
+    const projects = getFeaturedProjects()
+    setFeaturedProjects(projects)
+  }, [])
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
+      {/* Hero Section */}
       <section className="container mx-auto px-4 py-16 md:py-24">
         <div className="flex flex-col items-center text-center space-y-8">
           <div className="relative">
@@ -37,13 +53,16 @@ export default function Home() {
 
           <div className="flex flex-col sm:flex-row gap-4 w-full max-w-md">
             <Button asChild className="flex-1">
-              <Link href="/about">
-                Learn More About Me
+              <Link href="/projects">
+                View My Projects
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
             <Button variant="outline" asChild className="flex-1">
-              <Link href="/projects">View My Projects</Link>
+              <Link href={whatsappUrl} target="_blank">
+                <MessageCircle className="mr-2 h-4 w-4" />
+                Chat on WhatsApp
+              </Link>
             </Button>
           </div>
 
@@ -114,6 +133,79 @@ export default function Home() {
               </p>
             </CardContent>
           </Card>
+        </div>
+      </section>
+
+      {/* Featured Projects Preview */}
+      {featuredProjects.length > 0 && (
+        <section className="container mx-auto px-4 py-16 bg-slate-50 dark:bg-slate-800/50">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-slate-900 dark:text-white">Featured Projects</h2>
+            <p className="text-slate-600 dark:text-slate-300 mt-2">Some of my recent work</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {featuredProjects.slice(0, 2).map((project) => (
+              <Card key={project.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+                <div className="aspect-video relative bg-slate-200 dark:bg-slate-700">
+                  <Image
+                    src={project.image || "/placeholder.svg?height=300&width=400"}
+                    alt={project.title}
+                    fill
+                    className="object-cover"
+                    unoptimized
+                  />
+                </div>
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-bold mb-2">{project.title}</h3>
+                  <p className="text-slate-600 dark:text-slate-300 text-sm line-clamp-2 mb-4">{project.description}</p>
+                  <Button asChild size="sm">
+                    <Link href="/projects">
+                      View Details
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <div className="text-center mt-10">
+            <Button asChild>
+              <Link href="/projects">
+                View All Projects
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
+        </section>
+      )}
+
+      {/* Contact CTA */}
+      <section className="container mx-auto px-4 py-16">
+        <div className="max-w-4xl mx-auto bg-blue-600 dark:bg-blue-700 rounded-xl p-8 text-white text-center">
+          <h2 className="text-3xl font-bold mb-4">Ready to Start Your Project?</h2>
+          <p className="text-blue-100 mb-8 max-w-2xl mx-auto">
+            I'm currently available for freelance work and collaborations. Let's discuss your project and bring your
+            ideas to life!
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button asChild variant="secondary">
+              <Link href="/contact">Contact Me</Link>
+            </Button>
+            <Button asChild variant="outline" className="text-white border-white/30 border-[1px] border-solid hover:bg-white/10">
+              <Link href={whatsappUrl} target="_blank">
+                <MessageCircle className="mr-2 h-4 w-4" />
+                WhatsApp Me
+              </Link>
+            </Button>
+            <Button asChild variant="outline" className="text-white border-white/30 border-[1px] border-solid hover:bg-white/10">
+              <Link href={`tel:+${whatsappNumber}`}>
+                <Phone className="mr-2 h-4 w-4" />
+                Call Me
+              </Link>
+            </Button>
+          </div>
         </div>
       </section>
     </div>

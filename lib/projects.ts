@@ -54,7 +54,7 @@ const defaultProjects: Project[] = [
   },
     {
     id: "4",
-    title: "a Bible quiz",
+    title: " Bible quiz",
     description:
       "a Bible quiz application that allows users to test their knowledge of the Bible through multiple-choice questions. It features a user-friendly interface, score tracking, and a variety of quizzes covering different books and themes of the Bible.",
     image: "images/image.png",
@@ -70,7 +70,7 @@ const defaultProjects: Project[] = [
     title: "Cervical Cancer Diagnosis",
     description:
       "A medical Site that works with Ai to diagnose and provide information on cervical cancer. It uses Exper system algorithms to analyze user inputs and provide accurate diagnoses and recommendations.",
-    image: "images/image.png",
+    image: "images/cancer.png",
     technologies: ["React", "Typescript", "Nextjs", "Tailwind Css"],
     liveUrl: "https://isaac-bible-quiz.vercel.app",
     githubUrl: "",
@@ -83,52 +83,86 @@ const defaultProjects: Project[] = [
 // Check if we're in the browser
 const isBrowser = typeof window !== "undefined"
 
+// Storage key for projects
+const STORAGE_KEY = "portfolio-projects"
+
+// Debug mode for logging
+const DEBUG = true
+
+// Log helper function
+function log(...args: any[]) {
+  if (DEBUG) {
+    console.log("[Projects]", ...args)
+  }
+}
+
 // Get projects from localStorage with fallback to defaults
 function getStoredProjects(): Project[] {
   if (!isBrowser) {
+    log("Server-side rendering, using default projects")
     return defaultProjects
   }
 
   try {
-    const stored = localStorage.getItem("portfolio-projects")
+    const stored = localStorage.getItem(STORAGE_KEY)
     if (stored) {
+      log("Found stored projects in localStorage")
       const parsed = JSON.parse(stored)
-      // Convert createdAt strings back to Date objects and merge with defaults
+
+      // Convert createdAt strings back to Date objects
       const storedProjects = parsed.map((project: any) => ({
         ...project,
         createdAt: new Date(project.createdAt),
       }))
 
+      log(`Loaded ${storedProjects.length} projects from localStorage`)
+
       // Merge stored projects with defaults, avoiding duplicates
       const allProjects = [...storedProjects]
+      let defaultsAdded = 0
+
       defaultProjects.forEach((defaultProject) => {
-        if (!storedProjects.find((p) => p.id === defaultProject.id)) {
+        if (!storedProjects.find((p: Project) => p.id === defaultProject.id)) {
           allProjects.push(defaultProject)
+          defaultsAdded++
         }
       })
+
+      if (defaultsAdded > 0) {
+        log(`Added ${defaultsAdded} default projects that were missing`)
+      }
 
       return allProjects
     }
   } catch (error) {
     console.error("Error parsing stored projects:", error)
+    log("Error loading projects from localStorage, falling back to defaults")
   }
 
+  log("No stored projects found, using defaults")
   return defaultProjects
 }
 
 // Save projects to localStorage
 function saveProjects(projects: Project[]) {
-  if (!isBrowser) return
+  if (!isBrowser) {
+    log("Server-side rendering, skipping save")
+    return
+  }
 
   try {
-    localStorage.setItem("portfolio-projects", JSON.stringify(projects))
-    console.log("Projects saved to localStorage:", projects.length)
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(projects))
+    log(`Saved ${projects.length} projects to localStorage`)
+
+    // Dispatch event to notify other components
+    window.dispatchEvent(new CustomEvent("projects-updated", { detail: { count: projects.length } }))
   } catch (error) {
     console.error("Error saving projects to localStorage:", error)
+    log("Failed to save projects to localStorage")
   }
 }
 
-// Global projects state
+// Global projects cache
 let projectsCache: Project[] | null = null
 
 export function getProjects(): Project[] {
@@ -147,6 +181,8 @@ export function getProject(id: string): Project | undefined {
 }
 
 export function addProject(project: Omit<Project, "id" | "createdAt">): Project {
+  log("Adding new project:", project.title)
+
   const newProject: Project = {
     ...project,
     id: `project-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
@@ -163,18 +199,20 @@ export function addProject(project: Omit<Project, "id" | "createdAt">): Project 
   // Update cache
   projectsCache = updatedProjects
 
-  console.log("Project added successfully:", newProject.title)
-  console.log("Total projects after addition:", updatedProjects.length)
+  log("Project added successfully:", newProject.title)
+  log("Total projects after addition:", updatedProjects.length)
 
   return newProject
 }
 
 export function updateProject(id: string, updates: Partial<Project>): Project | null {
+  log("Updating project:", id)
+
   const currentProjects = getStoredProjects()
   const index = currentProjects.findIndex((project) => project.id === id)
 
   if (index === -1) {
-    console.error("Project not found for update:", id)
+    log("Project not found for update:", id)
     return null
   }
 
@@ -182,16 +220,24 @@ export function updateProject(id: string, updates: Partial<Project>): Project | 
   saveProjects(currentProjects)
   projectsCache = currentProjects
 
-  console.log("Project updated successfully:", currentProjects[index].title)
+  log("Project updated successfully:", currentProjects[index].title)
   return currentProjects[index]
 }
 
 export function deleteProject(id: string): boolean {
+  log("Deleting project:", id)
+
   const currentProjects = getStoredProjects()
   const index = currentProjects.findIndex((project) => project.id === id)
 
   if (index === -1) {
-    console.error("Project not found for deletion:", id)
+    log("Project not found for deletion:", id)
+    return false
+  }
+
+  // Don't delete default projects in production
+  if (process.env.NODE_ENV === "production" && defaultProjects.some((p) => p.id === id)) {
+    log("Attempted to delete a default project in production, skipping:", id)
     return false
   }
 
@@ -200,25 +246,38 @@ export function deleteProject(id: string): boolean {
   saveProjects(currentProjects)
   projectsCache = currentProjects
 
-  console.log("Project deleted successfully:", deletedProject.title)
+  log("Project deleted successfully:", deletedProject.title)
   return true
 }
 
 // Force refresh projects cache
 export function refreshProjectsCache(): void {
+  log("Refreshing projects cache")
   projectsCache = null
+
   if (isBrowser) {
     // Trigger a storage event to notify other components
-    window.dispatchEvent(new Event("projects-updated"))
+    window.dispatchEvent(new CustomEvent("projects-updated"))
+    log("Dispatched projects-updated event")
   }
 }
 
 // Initialize projects on module load (browser only)
 if (isBrowser) {
   // Ensure default projects are always available
-  const stored = localStorage.getItem("portfolio-projects")
+  const stored = localStorage.getItem(STORAGE_KEY)
   if (!stored) {
-    console.log("Initializing default projects...")
+    log("Initializing default projects...")
     saveProjects(defaultProjects)
   }
+
+  // Set up storage event listener
+  window.addEventListener("storage", (event) => {
+    if (event.key === STORAGE_KEY) {
+      log("Storage event detected, refreshing projects")
+      projectsCache = null
+    }
+  })
+
+  log("Projects module initialized")
 }
