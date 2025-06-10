@@ -61,7 +61,7 @@ const defaultProjects: Project[] = [
     title: "Weather Dashboard",
     description:
       "A responsive weather application that provides current weather conditions and forecasts. Features location-based weather data and interactive charts.",
-    image: "/placeholder.svg?height=300&width=400",
+    image: "/images/weather.png", 
     technologies: ["React", "Chart.js", "OpenWeather API", "CSS3"],
     liveUrl: "https://weather-dashboard-demo.vercel.app",
     githubUrl: "",
@@ -74,7 +74,7 @@ const defaultProjects: Project[] = [
     title: "Bible Quiz",
     description:
       "A Bible quiz application that allows users to test their knowledge of the Bible through multiple-choice questions. It features a user-friendly interface, score tracking, and a variety of quizzes covering different books and themes of the Bible.",
-    image: "/placeholder.svg?height=300&width=400",
+    image: "/images/image.png",
     technologies: ["React", "TypeScript", "Next.js", "Tailwind CSS"],
     liveUrl: "https://isaac-bible-quiz.vercel.app",
     githubUrl: "",
@@ -87,7 +87,7 @@ const defaultProjects: Project[] = [
     title: "Cervical Cancer Diagnosis",
     description:
       "A medical site that works with AI to diagnose and provide information on cervical cancer. It uses expert system algorithms to analyze user inputs and provide accurate diagnoses and recommendations.",
-    image: "/placeholder.svg?height=300&width=400",
+    image: "/images/cancer.png",
     technologies: ["JavaScript", "MySQL", "PHP", "CSS", "HTML"],
     liveUrl: "https://cervical-cancer-diagnosis.ct.ws",
     githubUrl: "",
