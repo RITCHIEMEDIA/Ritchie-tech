@@ -1,9 +1,15 @@
 "use server"
 
-import { addProject, updateProject, deleteProject, refreshProjectsCache } from "@/lib/projects"
+import { addProject, updateProject, deleteProject, refreshProjectsCache, type UpdateResult } from "@/lib/projects"
 import { revalidatePath, revalidateTag } from "next/cache"
 
-export async function createProject(formData: FormData) {
+export async function createProject(formData: FormData): Promise<{
+  success: boolean
+  project?: any
+  error?: string
+  warnings?: string[]
+  validationErrors?: Record<string, string>
+}> {
   const title = formData.get("title") as string
   const description = formData.get("description") as string
   const image = formData.get("image") as string
@@ -81,7 +87,16 @@ export async function createProject(formData: FormData) {
   }
 }
 
-export async function editProject(id: string, formData: FormData) {
+export async function editProject(
+  id: string,
+  formData: FormData,
+): Promise<{
+  success: boolean
+  project?: any
+  error?: string
+  warnings?: string[]
+  validationErrors?: Record<string, string>
+}> {
   const title = formData.get("title") as string
   const description = formData.get("description") as string
   const image = formData.get("image") as string
@@ -95,6 +110,7 @@ export async function editProject(id: string, formData: FormData) {
   const featured = formData.get("featured") === "on"
 
   console.log("Server: Updating project:", id)
+  console.log("Server: Update data:", { title, description, technologies: technologies.length })
 
   // Server-side validation (same as create)
   if (!title || title.trim().length < 3) {
@@ -109,8 +125,28 @@ export async function editProject(id: string, formData: FormData) {
     return { success: false, error: "At least one technology is required" }
   }
 
+  // Validate URLs if provided
+  if (liveUrl && !isValidUrl(liveUrl)) {
+    return { success: false, error: "Live URL is not valid" }
+  }
+
+  if (githubUrl && !isValidUrl(githubUrl)) {
+    return { success: false, error: "GitHub URL is not valid" }
+  }
+
+  if (image && !isValidUrl(image)) {
+    return { success: false, error: "Image URL is not valid" }
+  }
+
+  // Validate year
+  const currentYear = new Date().getFullYear()
+  const year = Number.parseInt(date)
+  if (isNaN(year) || year < 2000 || year > currentYear + 1) {
+    return { success: false, error: `Year must be between 2000 and ${currentYear + 1}` }
+  }
+
   try {
-    const project = updateProject(id, {
+    const result: UpdateResult = updateProject(id, {
       title: title.trim(),
       description: description.trim(),
       image: image.trim() || "/placeholder.svg?height=300&width=400",
@@ -121,11 +157,20 @@ export async function editProject(id: string, formData: FormData) {
       featured,
     })
 
-    if (!project) {
-      return { success: false, error: "Project not found" }
+    if (!result.success) {
+      console.error("Server: Project update failed:", result.error)
+      return {
+        success: false,
+        error: result.error || "Failed to update project",
+        validationErrors: result.validationErrors,
+      }
     }
 
-    console.log("Server: Project updated successfully:", project.id)
+    console.log("Server: Project updated successfully:", result.project?.id)
+
+    if (result.warnings && result.warnings.length > 0) {
+      console.warn("Server: Project update warnings:", result.warnings)
+    }
 
     // Force refresh cache
     refreshProjectsCache()
@@ -136,21 +181,25 @@ export async function editProject(id: string, formData: FormData) {
     revalidatePath("/")
     revalidateTag("projects")
 
-    return { success: true, project }
+    return {
+      success: true,
+      project: result.project,
+      warnings: result.warnings,
+    }
   } catch (error) {
     console.error("Server: Error updating project:", error)
     return { success: false, error: "Failed to update project. Please try again." }
   }
 }
 
-export async function removeProject(id: string) {
+export async function removeProject(id: string): Promise<{ success: boolean; error?: string }> {
   console.log("Server: Deleting project:", id)
 
   try {
     const success = deleteProject(id)
 
     if (!success) {
-      return { success: false, error: "Project not found" }
+      return { success: false, error: "Project not found or could not be deleted" }
     }
 
     console.log("Server: Project deleted successfully:", id)

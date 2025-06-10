@@ -10,8 +10,17 @@ import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { createProject, editProject } from "@/app/admin/actions"
-import { AlertCircle, CheckCircle, Upload, X } from "lucide-react"
+import { AlertCircle, CheckCircle, Upload, X, AlertTriangle } from "lucide-react"
 import type { Project } from "@/lib/projects"
+
+// Add type definition at the top of the file
+type ServerActionResult = {
+  success: boolean
+  project?: any
+  error?: string
+  warnings?: string[]
+  validationErrors?: Record<string, string>
+}
 
 interface ProjectFormProps {
   project?: Project
@@ -21,7 +30,11 @@ interface ProjectFormProps {
 
 export function ProjectForm({ project, onSuccess, onCancel }: ProjectFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
+  const [message, setMessage] = useState<{
+    type: "success" | "error" | "warning"
+    text: string
+    warnings?: string[]
+  } | null>(null)
   const [formData, setFormData] = useState({
     title: project?.title || "",
     description: project?.description || "",
@@ -43,12 +56,16 @@ export function ProjectForm({ project, onSuccess, onCancel }: ProjectFormProps) 
       newErrors.title = "Title is required"
     } else if (formData.title.length < 3) {
       newErrors.title = "Title must be at least 3 characters"
+    } else if (formData.title.length > 100) {
+      newErrors.title = "Title must be less than 100 characters"
     }
 
     if (!formData.description.trim()) {
       newErrors.description = "Description is required"
     } else if (formData.description.length < 10) {
       newErrors.description = "Description must be at least 10 characters"
+    } else if (formData.description.length > 1000) {
+      newErrors.description = "Description must be less than 1000 characters"
     }
 
     if (!formData.technologies.trim()) {
@@ -71,8 +88,8 @@ export function ProjectForm({ project, onSuccess, onCancel }: ProjectFormProps) 
     // Date validation
     const currentYear = new Date().getFullYear()
     const year = Number.parseInt(formData.date)
-    if (isNaN(year) || year < 2000 || year > currentYear + 1) {
-      newErrors.date = `Year must be between 2000 and ${currentYear + 1}`
+    if (isNaN(year) || year < 2000 || year > currentYear + 2) {
+      newErrors.date = `Year must be between 2000 and ${currentYear + 2}`
     }
 
     setErrors(newErrors)
@@ -94,8 +111,13 @@ export function ProjectForm({ project, onSuccess, onCancel }: ProjectFormProps) 
     if (errors[field]) {
       setErrors((prev) => ({ ...prev, [field]: "" }))
     }
+    // Clear messages when user makes changes
+    if (message) {
+      setMessage(null)
+    }
   }
 
+  // Update the handleSubmit function
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
 
@@ -124,14 +146,19 @@ export function ProjectForm({ project, onSuccess, onCancel }: ProjectFormProps) 
       }
 
       console.log("Form: Calling server action...")
-      const result = project ? await editProject(project.id, submitData) : await createProject(submitData)
+      const result: ServerActionResult = project
+        ? await editProject(project.id, submitData)
+        : await createProject(submitData)
 
       console.log("Form: Server action result:", result)
 
       if (result.success) {
+        const successMessage = `Project "${formData.title}" ${project ? "updated" : "created"} successfully! 🎉`
+
         setMessage({
-          type: "success",
-          text: `Project "${formData.title}" ${project ? "updated" : "created"} successfully! 🎉`,
+          type: result.warnings && result.warnings.length > 0 ? "warning" : "success",
+          text: successMessage,
+          warnings: result.warnings,
         })
 
         // Reset form if creating new project
@@ -150,7 +177,15 @@ export function ProjectForm({ project, onSuccess, onCancel }: ProjectFormProps) 
 
         // Trigger storage event to notify other components
         if (typeof window !== "undefined") {
-          window.dispatchEvent(new Event("projects-updated"))
+          window.dispatchEvent(
+            new CustomEvent("projects-updated", {
+              detail: {
+                action: project ? "updated" : "created",
+                projectId: result.project?.id,
+                timestamp: new Date().toISOString(),
+              },
+            }),
+          )
         }
 
         // Call success callback after a short delay
@@ -161,7 +196,16 @@ export function ProjectForm({ project, onSuccess, onCancel }: ProjectFormProps) 
           }
         }, 2000)
       } else {
-        setMessage({ type: "error", text: result.error || "Something went wrong" })
+        console.error("Form: Server action failed:", result.error)
+        setMessage({
+          type: "error",
+          text: result.error || "Something went wrong",
+        })
+
+        // Handle validation errors if they exist
+        if (result.validationErrors) {
+          setErrors(result.validationErrors)
+        }
       }
     } catch (error) {
       console.error("Form: Error submitting project:", error)
@@ -195,6 +239,7 @@ export function ProjectForm({ project, onSuccess, onCancel }: ProjectFormProps) 
                 onChange={(e) => handleInputChange("title", e.target.value)}
                 placeholder="Enter project title"
                 className={errors.title ? "border-red-500" : ""}
+                maxLength={100}
               />
               {errors.title && (
                 <p className="text-sm text-red-600 flex items-center gap-1">
@@ -202,6 +247,7 @@ export function ProjectForm({ project, onSuccess, onCancel }: ProjectFormProps) 
                   {errors.title}
                 </p>
               )}
+              <p className="text-xs text-slate-500">{formData.title.length}/100 characters</p>
             </div>
             <div className="space-y-2">
               <Label htmlFor="date">Year *</Label>
@@ -231,6 +277,7 @@ export function ProjectForm({ project, onSuccess, onCancel }: ProjectFormProps) 
               placeholder="Describe your project, its features, and what makes it special..."
               rows={4}
               className={errors.description ? "border-red-500" : ""}
+              maxLength={1000}
             />
             <div className="flex justify-between items-center">
               {errors.description ? (
@@ -239,7 +286,7 @@ export function ProjectForm({ project, onSuccess, onCancel }: ProjectFormProps) 
                   {errors.description}
                 </p>
               ) : (
-                <p className="text-sm text-slate-500">{formData.description.length} characters</p>
+                <p className="text-sm text-slate-500">{formData.description.length}/1000 characters</p>
               )}
             </div>
           </div>
@@ -345,17 +392,37 @@ export function ProjectForm({ project, onSuccess, onCancel }: ProjectFormProps) 
             </div>
           </div>
 
-          {/* Success/Error Message */}
+          {/* Success/Error/Warning Message */}
           {message && (
             <div
-              className={`p-4 rounded-lg border flex items-center gap-2 ${
+              className={`p-4 rounded-lg border flex flex-col gap-2 ${
                 message.type === "success"
                   ? "bg-green-50 border-green-200 text-green-800 dark:bg-green-900/20 dark:border-green-800 dark:text-green-300"
-                  : "bg-red-50 border-red-200 text-red-800 dark:bg-red-900/20 dark:border-red-800 dark:text-red-300"
+                  : message.type === "warning"
+                    ? "bg-yellow-50 border-yellow-200 text-yellow-800 dark:bg-yellow-900/20 dark:border-yellow-800 dark:text-yellow-300"
+                    : "bg-red-50 border-red-200 text-red-800 dark:bg-red-900/20 dark:border-red-800 dark:text-red-300"
               }`}
             >
-              {message.type === "success" ? <CheckCircle className="h-4 w-4" /> : <AlertCircle className="h-4 w-4" />}
-              {message.text}
+              <div className="flex items-center gap-2">
+                {message.type === "success" ? (
+                  <CheckCircle className="h-4 w-4" />
+                ) : message.type === "warning" ? (
+                  <AlertTriangle className="h-4 w-4" />
+                ) : (
+                  <AlertCircle className="h-4 w-4" />
+                )}
+                {message.text}
+              </div>
+              {message.warnings && message.warnings.length > 0 && (
+                <div className="ml-6 space-y-1">
+                  <p className="text-sm font-medium">Warnings:</p>
+                  <ul className="text-sm list-disc list-inside space-y-1">
+                    {message.warnings.map((warning, index) => (
+                      <li key={index}>{warning}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           )}
 
