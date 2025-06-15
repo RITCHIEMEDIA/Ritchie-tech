@@ -76,7 +76,11 @@ const defaultProjects: Project[] = [
       "A Bible quiz application that allows users to test their knowledge of the Bible through multiple-choice questions. It features a user-friendly interface, score tracking, and a variety of quizzes covering different books and themes of the Bible.",
     image: "/images/image.png",
     technologies: ["React", "TypeScript", "Next.js", "Tailwind CSS"],
+<<<<<<< HEAD
     liveUrl: "https://biblepro.vercel.app",
+=======
+    liveUrl: "https://isaac-bible-quiz.vercel.app",
+>>>>>>> 05626c6fdbe7d28b9106b1c76861ae95d15246ee
     githubUrl: "",
     date: "2025",
     featured: true,
