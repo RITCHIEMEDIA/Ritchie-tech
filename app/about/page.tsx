@@ -61,9 +61,9 @@ export default function About() {
         <div className="max-w-4xl mx-auto space-y-12">
           {/* Header */}
           <div className="text-center space-y-4">
-            <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white">About Isaac Elisha</h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white">About RITCHIE</h1>
             <p className="text-xl text-slate-600 dark:text-slate-300">
-              Full-Stack Developer | Computer Science Student | Tech Enthusiast
+              Full-Stack Developer | Software Developer | Tech Enthusiast
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mt-6">
               <Button asChild>

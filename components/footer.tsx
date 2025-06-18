@@ -95,7 +95,7 @@ export default function Footer() {
                 className="flex items-center gap-2 text-slate-300 hover:text-white transition-colors text-sm"
               >
                 <Mail className="h-4 w-4" />
-                Email: isaac@ritchietech.com
+                Email: ritchietech01@gmail.com
               </Link>
             </div>
             <div className="flex space-x-3 pt-2">
