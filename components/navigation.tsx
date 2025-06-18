@@ -22,7 +22,7 @@ export default function Navigation() {
   // WhatsApp number and resume path
   const whatsappNumber = "2349079928298"
   const whatsappUrl = `https://wa.me/${whatsappNumber}`
-  const resumePath = "/resume/isaac-Elisha-Resume.pdf"
+  const resumePath = "/resume/Isaac-Elisha-Resume.pdf"
 
   return (
     <nav className="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-700">

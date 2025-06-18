@@ -25,7 +25,7 @@ export default function Contact() {
 
   // WhatsApp number and resume path
   const whatsappNumber = "2349079928298"
-  const resumePath = "/resume/isaac-Elisha-Resume.pdf"
+  const resumePath = "/resume/Isaac-Elisha-Resume.pdf"
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     const { name, value } = e.target

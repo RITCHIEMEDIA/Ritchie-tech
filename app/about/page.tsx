@@ -48,7 +48,7 @@ export default function About() {
   ]
 
   // Resume and WhatsApp paths
-  const resumePath = "/resume/isaac-Elisha-Resume.pdf"
+  const resumePath = "/resume/Isaac-Elisha-Resume.pdf"
   const whatsappNumber = "2349079928298"
   const whatsappMessage = encodeURIComponent(
     "Hello Isaac! I reviewed your portfolio and would like to discuss potential opportunities.",

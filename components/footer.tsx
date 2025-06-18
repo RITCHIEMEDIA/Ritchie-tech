@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 export default function Footer() {
   // WhatsApp number and resume path
   const whatsappNumber = "2349079928298"
-  const resumePath = "/resume/isaac-Elisha-Resume.pdf"
+  const resumePath = "/resume/Isaac-Elisha-Resume.pdf"
 
   // WhatsApp message - using correct WhatsApp URL format
   const whatsappMessage = encodeURIComponent(
