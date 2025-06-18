@@ -5,7 +5,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
-import { Menu, X, MessageSquare } from "lucide-react"
+import { Menu, X, MessageSquare, Download } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export default function Navigation() {
@@ -19,12 +19,13 @@ export default function Navigation() {
     { name: "Contact", href: "/contact" },
   ]
 
-  // WhatsApp number
+  // WhatsApp number and resume path
   const whatsappNumber = "2349079928298"
   const whatsappUrl = `https://wa.me/${whatsappNumber}`
+  const resumePath = "/resume/isaac-Elisha-Resume.pdf"
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 border-solid dark:border-slate-700">
+    <nav className="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-700">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -51,6 +52,12 @@ export default function Navigation() {
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-2">
             <Button size="sm" variant="outline" asChild className="text-sm">
+              <Link href={resumePath} target="_blank" download="Isaac-Elisha-Resume.pdf">
+                <Download className="h-4 w-4 mr-1" />
+                CV
+              </Link>
+            </Button>
+            <Button size="sm" variant="outline" asChild className="text-sm">
               <Link href={whatsappUrl} target="_blank">
                 <MessageSquare className="h-4 w-4 mr-1" />
                 Chat
@@ -61,6 +68,12 @@ export default function Navigation() {
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center space-x-2">
+            <Button size="sm" variant="outline" asChild className="text-sm">
+              <Link href={resumePath} target="_blank" download="Isaac-Elisha-Resume.pdf">
+                <Download className="h-4 w-4" />
+                <span className="sr-only">Download CV</span>
+              </Link>
+            </Button>
             <Button size="sm" variant="outline" asChild className="text-sm">
               <Link href={whatsappUrl} target="_blank">
                 <MessageSquare className="h-4 w-4" />
@@ -92,6 +105,16 @@ export default function Navigation() {
                 {item.name}
               </Link>
             ))}
+            <Link
+              href={resumePath}
+              target="_blank"
+              download="Isaac-Elisha-Resume.pdf"
+              className="flex items-center gap-2 px-3 py-2 text-base font-medium rounded-md transition-colors bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400"
+              onClick={() => setIsOpen(false)}
+            >
+              <Download className="h-4 w-4" />
+              View My CV
+            </Link>
             <Link
               href={whatsappUrl}
               target="_blank"

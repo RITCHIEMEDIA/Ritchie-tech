@@ -1,6 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Calendar, MapPin, Award, BookOpen } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Calendar, MapPin, Award, BookOpen, Download, MessageCircle } from "lucide-react"
+import Link from "next/link"
 
 export default function About() {
   const skills = [
@@ -45,6 +47,14 @@ export default function About() {
     },
   ]
 
+  // Resume and WhatsApp paths
+  const resumePath = "/resume/isaac-Elisha-Resume.pdf"
+  const whatsappNumber = "2349079928298"
+  const whatsappMessage = encodeURIComponent(
+    "Hello Isaac! I reviewed your portfolio and would like to discuss potential opportunities.",
+  )
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
       <div className="container mx-auto px-4 py-16">
@@ -55,6 +65,20 @@ export default function About() {
             <p className="text-xl text-slate-600 dark:text-slate-300">
               Full-Stack Developer | Computer Science Student | Tech Enthusiast
             </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mt-6">
+              <Button asChild>
+                <Link href={resumePath} target="_blank" download="Isaac-Elisha-Resume.pdf">
+                  <Download className="h-4 w-4 mr-2" />
+                  Download My Resume
+                </Link>
+              </Button>
+              <Button variant="outline" asChild>
+                <Link href={whatsappUrl} target="_blank">
+                  <MessageCircle className="h-4 w-4 mr-2" />
+                  Let's Connect
+                </Link>
+              </Button>
+            </div>
           </div>
 
           {/* Bio Section */}
@@ -175,6 +199,27 @@ export default function About() {
                     </p>
                   </div>
                 ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Call to Action */}
+          <Card className="bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800">
+            <CardContent className="p-8 text-center">
+              <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">Want to Know More?</h3>
+              <p className="text-slate-600 dark:text-slate-300 mb-6">
+                Download my complete resume for detailed information about my experience, projects, and achievements.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button asChild size="lg">
+                  <Link href={resumePath} target="_blank" download="Isaac-Elisha-Resume.pdf">
+                    <Download className="h-5 w-5 mr-2" />
+                    Download Full Resume
+                  </Link>
+                </Button>
+                <Button variant="outline" size="lg" asChild>
+                  <Link href="/contact">Get In Touch</Link>
+                </Button>
               </div>
             </CardContent>
           </Card>

@@ -1,10 +1,11 @@
 import Link from "next/link"
-import { Github, Linkedin, Mail, Heart, MessageCircle, Phone } from "lucide-react"
+import { Github, Linkedin, Mail, Heart, MessageCircle, Phone, Download } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 export default function Footer() {
-  // WhatsApp number
+  // WhatsApp number and resume path
   const whatsappNumber = "2349079928298"
+  const resumePath = "/resume/isaac-Elisha-Resume.pdf"
 
   // WhatsApp message - using correct WhatsApp URL format
   const whatsappMessage = encodeURIComponent(
@@ -23,14 +24,20 @@ export default function Footer() {
               Full-Stack Developer passionate about creating innovative web solutions and building the future of
               technology.
             </p>
-            <div className="flex space-x-2">
-              <Button variant="outline" size="sm" asChild className="text-white border-white/20 border-[1px] border-solid hover:bg-white/10">
+            <div className="flex flex-wrap gap-2">
+              <Button variant="outline" size="sm" asChild className="text-white border-white/20 hover:bg-white/10">
+                <Link href={resumePath} target="_blank" download="Isaac-Elisha-Resume.pdf">
+                  <Download className="h-4 w-4 mr-1" />
+                  Resume
+                </Link>
+              </Button>
+              <Button variant="outline" size="sm" asChild className="text-white border-white/20 hover:bg-white/10">
                 <Link href={whatsappUrl} target="_blank" rel="noopener noreferrer">
                   <MessageCircle className="h-4 w-4 mr-1" />
                   WhatsApp
                 </Link>
               </Button>
-              <Button variant="outline" size="sm" asChild className="text-white border-white/20 border-[1px] border-solid hover:bg-white/10">
+              <Button variant="outline" size="sm" asChild className="text-white border-white/20 hover:bg-white/10">
                 <Link href="/contact">Contact Me</Link>
               </Button>
             </div>
@@ -51,6 +58,14 @@ export default function Footer() {
               </Link>
               <Link href="/contact" className="block text-slate-300 hover:text-white transition-colors text-sm">
                 Contact
+              </Link>
+              <Link
+                href={resumePath}
+                target="_blank"
+                download="Isaac-Elisha-Resume.pdf"
+                className="block text-slate-300 hover:text-white transition-colors text-sm"
+              >
+                Download Resume
               </Link>
             </div>
           </div>
@@ -106,7 +121,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-slate-800 border-solid mt-8 pt-8 text-center">
+        <div className="border-t border-slate-800 mt-8 pt-8 text-center">
           <p className="text-slate-400 text-sm flex items-center justify-center gap-1">
             Made with <Heart className="h-4 w-4 text-red-500" /> by Isaac Elisha © {new Date().getFullYear()}
           </p>

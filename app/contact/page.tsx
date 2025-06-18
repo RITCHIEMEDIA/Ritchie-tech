@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
-import { AlertCircle, CheckCircle, Send, MessageSquare, Phone } from "lucide-react"
+import { AlertCircle, CheckCircle, Send, MessageSquare, Phone, Download, FileText } from "lucide-react"
 import Link from "next/link"
 
 export default function Contact() {
@@ -23,8 +23,9 @@ export default function Contact() {
   const [submitStatus, setSubmitStatus] = useState<{ type: "success" | "error"; message: string } | null>(null)
   const formRef = useRef<HTMLFormElement>(null)
 
-  // WhatsApp number
+  // WhatsApp number and resume path
   const whatsappNumber = "2349079928298"
+  const resumePath = "/resume/isaac-Elisha-Resume.pdf"
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     const { name, value } = e.target
@@ -284,6 +285,20 @@ export default function Contact() {
                     <p className="text-slate-600 dark:text-slate-300">+234 907 992 8298</p>
                     <Button variant="outline" size="sm" asChild className="mt-2">
                       <Link href={`tel:+${whatsappNumber}`}>Call Now</Link>
+                    </Button>
+                  </div>
+
+                  <div className="space-y-2">
+                    <h3 className="font-semibold flex items-center gap-2">
+                      <FileText className="h-4 w-4 text-blue-600" />
+                      Resume
+                    </h3>
+                    <p className="text-slate-600 dark:text-slate-300">Download my complete CV</p>
+                    <Button variant="outline" size="sm" asChild className="mt-2">
+                      <Link href={resumePath} target="_blank" download="Isaac-Elisha-Resume.pdf">
+                        <Download className="h-4 w-4 mr-1" />
+                        Download CV
+                      </Link>
                     </Button>
                   </div>
 

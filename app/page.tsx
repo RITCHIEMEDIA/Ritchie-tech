@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Github, Linkedin, Mail, ArrowRight, MessageCircle, Phone } from "lucide-react"
+import { Github, Linkedin, Mail, ArrowRight, MessageCircle, Phone, Download } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { getFeaturedProjects } from "@/lib/projects"
@@ -13,6 +13,9 @@ export default function Home() {
 
   // WhatsApp number
   const whatsappNumber = "2349079928298"
+
+  // Resume path
+  const resumePath = "/resume/isaac-Elisha-Resume.pdf"
 
   // WhatsApp message - using correct WhatsApp URL format
   const whatsappMessage = encodeURIComponent(
@@ -37,7 +40,7 @@ export default function Home() {
               alt="Isaac Elisha Profile"
               width={200}
               height={200}
-              className="rounded-full border-4 border-white border-solid shadow-xl object-cover"
+              className="rounded-full border-4 border-white shadow-xl object-cover"
               priority
             />
           </div>
@@ -51,7 +54,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 w-full max-w-md">
+          <div className="flex flex-col sm:flex-row gap-4 w-full max-w-2xl">
             <Button asChild className="flex-1">
               <Link href="/projects">
                 View My Projects
@@ -62,6 +65,12 @@ export default function Home() {
               <Link href={whatsappUrl} target="_blank">
                 <MessageCircle className="mr-2 h-4 w-4" />
                 Chat on WhatsApp
+              </Link>
+            </Button>
+            <Button variant="secondary" asChild className="flex-1">
+              <Link href={resumePath} target="_blank" download="Isaac-Elisha-Resume.pdf">
+                <Download className="mr-2 h-4 w-4" />
+                Download CV
               </Link>
             </Button>
           </div>
@@ -149,7 +158,7 @@ export default function Home() {
               <Card key={project.id} className="overflow-hidden hover:shadow-lg transition-shadow">
                 <div className="aspect-video relative bg-slate-200 dark:bg-slate-700">
                   <Image
-                    src={project.image || "/placeholder.svg?height=300&width=400"}
+                    src={project.image || "/images/project-placeholder.jpg"}
                     alt={project.title}
                     fill
                     className="object-cover"
@@ -193,16 +202,22 @@ export default function Home() {
             <Button asChild variant="secondary">
               <Link href="/contact">Contact Me</Link>
             </Button>
-            <Button asChild variant="outline" className="text-white border-white/30 border-[1px] border-solid hover:bg-white/10">
+            <Button asChild variant="outline" className="text-white border-white/30 hover:bg-white/10">
               <Link href={whatsappUrl} target="_blank">
                 <MessageCircle className="mr-2 h-4 w-4" />
                 WhatsApp Me
               </Link>
             </Button>
-            <Button asChild variant="outline" className="text-white border-white/30 border-[1px] border-solid hover:bg-white/10">
+            <Button asChild variant="outline" className="text-white border-white/30 hover:bg-white/10">
               <Link href={`tel:+${whatsappNumber}`}>
                 <Phone className="mr-2 h-4 w-4" />
                 Call Me
+              </Link>
+            </Button>
+            <Button asChild variant="outline" className="text-white border-white/30 hover:bg-white/10">
+              <Link href={resumePath} target="_blank" download="Isaac-Elisha-Resume.pdf">
+                <Download className="mr-2 h-4 w-4" />
+                View My CV
               </Link>
             </Button>
           </div>
