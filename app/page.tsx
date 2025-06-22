@@ -83,7 +83,7 @@ export default function Home() {
               </Link>
             </Button>
             <Button variant="ghost" size="icon" asChild>
-              <Link href="www.linkedin.com/in/isaac-elisha-a1701b371" target="_blank" rel="noopener noreferrer">
+              <Link href="https//www.linkedin.com/in/isaac-elisha-a1701b371" target="_blank" rel="noopener noreferrer">
                 <Linkedin className="h-6 w-6" />
                 <span className="sr-only">LinkedIn</span>
               </Link>
