@@ -106,7 +106,9 @@ export default function Footer() {
                 </Link>
               </Button>
               <Button variant="ghost" size="icon" asChild className="text-slate-300 hover:text-white">
-                <Link href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+                <Link href="www.linkedin.com/in/
+isaac-elisha-a1701b371
+" target="_blank" rel="noopener noreferrer">
                   <Linkedin className="h-5 w-5" />
                   <span className="sr-only">LinkedIn</span>
                 </Link>

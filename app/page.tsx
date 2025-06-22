@@ -83,13 +83,13 @@ export default function Home() {
               </Link>
             </Button>
             <Button variant="ghost" size="icon" asChild>
-              <Link href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+              <Link href="www.linkedin.com/in/isaac-elisha-a1701b371" target="_blank" rel="noopener noreferrer">
                 <Linkedin className="h-6 w-6" />
                 <span className="sr-only">LinkedIn</span>
               </Link>
             </Button>
             <Button variant="ghost" size="icon" asChild>
-              <Link href="mailto:isaac@ritchietech.com">
+              <Link href="mailto:ritchietch01@gmail.com">
                 <Mail className="h-6 w-6" />
                 <span className="sr-only">Email</span>
               </Link>
