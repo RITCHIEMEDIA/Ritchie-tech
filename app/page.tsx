@@ -202,7 +202,7 @@ export default function Home() {
             <Button asChild variant="secondary">
               <Link href="/contact">Contact Me</Link>
             </Button>
-            <Button asChild variant="outline" className="text-white border-white/30 hover:bg-white/10">
+            <Button asChild variant="outline" className="text- border-white/30 hover:bg-white/10">
               <Link href={whatsappUrl} target="_blank">
                 <MessageCircle className="mr-2 h-4 w-4" />
                 WhatsApp Me

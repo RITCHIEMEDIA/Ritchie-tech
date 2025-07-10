@@ -95,6 +95,50 @@ const defaultProjects: Project[] = [
     featured: true,
     createdAt: new Date("2024-06-08"),
   },
+
+  {
+    id: "6",
+    title: "Travelling Consultancy And Real Estate Consultancy",
+    description:
+      "A comprehensive platform for travel consultancy and real estate services. It provides users with personalized travel recommendations, real estate listings, and expert advice on both sectors.",
+    image: "/images/prestige.png",
+    technologies: ["Next Js", "Supabase", "Tailwind CSS", "JavaScript", "typescript", "node JS"],
+    liveUrl: "https://prestigeivc.vercel.app",
+    githubUrl: "",
+    date: "2025",
+    featured: true,
+    createdAt: new Date("2025-06-01"),
+  },
+
+  
+  {
+    id: "7",
+    title: "Cargo Parcel Delivery Real-time Tracking system",
+    description:
+      "A real-time tracking system for cargo and parcel delivery services. It allows users to track their shipments, view delivery status, and receive notifications on their mobile devices.",
+    image: "/images/delivery.png",
+    technologies: ["JavaScript", "Html","CSS3", "tailwind CSS", "PHP", "MySQL"],
+    liveUrl: "https://westwayxpress.infy.uk",
+    githubUrl: "",
+    date: "2025",
+    featured: true,
+    createdAt: new Date("2025-03-01"),
+  },
+
+ {
+    id: "8",
+    title: "Journals publishing website",
+    description:
+      "A platform for publishing and managing academic journals. It provides features for authors to submit articles, reviewers to provide feedback, and editors to manage the publication process.",
+    image: "/images/wajrds.png",
+    technologies: ["php" , "MySQL", "HTML", "CSS3", "JavaScript"],
+    liveUrl: "https://wajrds.org",
+    githubUrl: "",
+    date: "2025",
+    featured: true,
+    createdAt: new Date("2025-04-01"),
+  },
+
 ]
 
 // Check if we're in the browser
