@@ -139,6 +139,20 @@ const defaultProjects: Project[] = [
     createdAt: new Date("2025-04-01"),
   },
 
+  {
+    id: "9",
+    title: "Tradenexa Crypto & Giftcard Trading App",
+    description:
+      "A secure platform for exchanging and buying Bitcoin and other cryptocurrencies, as well as trading gift cards. Features real-time rates, user authentication, and fast transactions.",
+    image: "/images/tradenexa.png",
+    technologies: ["React", "Next.js", "Node.js", "TypeScript", "Tailwind CSS"],
+    liveUrl: "https://tradenexa.vercel.app",
+    githubUrl: "",
+    date: "2025",
+    featured: true,
+    createdAt: new Date("2025-06-15"),
+  }
+
 ]
 
 // Check if we're in the browser
