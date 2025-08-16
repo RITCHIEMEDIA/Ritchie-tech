@@ -40,6 +40,17 @@ export const metadata: Metadata = {
   },
 }
 
+// Add this type declaration
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'expertise-ai': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> & {
+        client: string;
+      }
+    }
+  }
+}
+
 export default function RootLayout({
   children,
 }: {
@@ -53,6 +64,11 @@ export default function RootLayout({
           <main>{children}</main>
           <Footer />
         </ThemeProvider>
+        <expertise-ai client="1dd9c2d1-9de9-455f-930b-f2ecdbff7f40"></expertise-ai>
+        <script 
+          src="https://d31ptbphd2zjsx.cloudfront.net/genweb/ai-genweb.js" 
+          defer
+        />
       </body>
     </html>
   )
