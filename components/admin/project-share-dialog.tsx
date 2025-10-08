@@ -105,7 +105,7 @@ export default function ProjectShareDialog({ project, open, onOpenChange }: Proj
           </div>
           <div className="text-xs text-slate-500 mb-2">Year: {project.date}</div>
           <div className="font-semibold text-blue-800 mb-2">
-            Hey! I just uploaded a new project 🚀<br />
+            Hey! I just uploaded a new project. 🚀<br />
             <span className="text-blue-700">Check it out!</span>
           </div>
           {(project.liveUrl || project.githubUrl) && (
