@@ -4,11 +4,15 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Edit, Trash2, ExternalLink, Github } from "lucide-react"
+import { Edit, Trash2, ExternalLink, Github, Share2 } from "lucide-react"
 import { removeProject } from "@/app/admin/actions"
 import type { Project } from "@/lib/projects"
 import Link from "next/link"
 import Image from "next/image"
+import dynamic from "next/dynamic"
+
+// Lazy load the share dialog to avoid SSR issues with html2canvas
+const ProjectShareDialog = dynamic(() => import("./project-share-dialog"), { ssr: false })
 
 interface ProjectListProps {
   projects: Project[]
@@ -17,6 +21,7 @@ interface ProjectListProps {
 
 export function ProjectList({ projects, onEdit }: ProjectListProps) {
   const [deletingId, setDeletingId] = useState<string | null>(null)
+  const [shareProject, setShareProject] = useState<Project | null>(null)
 
   async function handleDelete(id: string) {
     if (!confirm("Are you sure you want to delete this project?")) return
@@ -74,6 +79,14 @@ export function ProjectList({ projects, onEdit }: ProjectListProps) {
                     >
                       <Trash2 className="h-4 w-4" />
                     </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      title="Share Banner"
+                      onClick={() => setShareProject(project)}
+                    >
+                      <Share2 className="h-4 w-4" />
+                    </Button>
                   </div>
                 </div>
 
@@ -115,6 +128,14 @@ export function ProjectList({ projects, onEdit }: ProjectListProps) {
           </CardContent>
         </Card>
       ))}
+      {/* Share Dialog */}
+      {shareProject && (
+        <ProjectShareDialog
+          project={shareProject}
+          open={!!shareProject}
+          onOpenChange={(open) => open ? undefined : setShareProject(null)}
+        />
+      )}
     </div>
   )
 }
