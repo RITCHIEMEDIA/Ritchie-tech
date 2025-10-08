@@ -166,7 +166,7 @@ const defaultProjects: Project[] = [
     githubUrl: "",
     date: "2024",
     featured: true,
-    createdAt: new Date("2024-05-20"),
+    createdAt: new Date("2025-05-20"),
   },
   // New Project 2: Faspay – Bank App Simulation
   {
