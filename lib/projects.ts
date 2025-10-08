@@ -1,4 +1,4 @@
-export interface Project {
+  export interface Project {
   id: string
   title: string
   description: string
@@ -161,7 +161,7 @@ const defaultProjects: Project[] = [
     description:
       "Official website of Ihe Nri community, Anambra State, Nigeria. The platform offers comprehensive information about the community's history, culture, governance, and current news. Features include sections for local news updates, leadership details, community projects, photo galleries, and resources for indigenes and visitors. The site is built for accessibility and to serve as a digital hub for Ihe Nri people worldwide.",
     image: "/images/Annotation 2025-10-08 155520.png",
-    technologies: ["WordPress", "PHP", "HTML", "CSS", "JavaScript"],
+    technologies: ["Vite", "Express.js", "REACT", "TAILWINDCSS", "TypeScript", "Postgresql"],
     liveUrl: "https://ihe-nri.com",
     githubUrl: "",
     date: "2024",
@@ -175,7 +175,7 @@ const defaultProjects: Project[] = [
     description:
       "A modern digital banking simulation that allows users to experience seamless money management. Faspay features an intuitive dashboard for viewing balances, transaction history, and transferring funds. Users can create virtual accounts, manage cards, and analyze financial activity—all within a secure and responsive web application. Designed with a clean user interface and real-time feedback for a realistic banking experience.",
     image: "/images/faspay.png",
-    technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Node.js"],
+    technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Node.js", "prisma", "postgresql"],
     liveUrl: "https://faspaybank.vercel.app",
     githubUrl: "",
     date: "2025",
