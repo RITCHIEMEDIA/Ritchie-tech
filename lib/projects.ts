@@ -151,7 +151,38 @@ const defaultProjects: Project[] = [
     date: "2025",
     featured: true,
     createdAt: new Date("2025-06-15"),
-  }
+  },
+
+  
+  // New Project 1: IHE NRI Community Portal
+  {
+    id: "10",
+    title: "IHE NRI Community Portal",
+    description:
+      "Official website of Ihe Nri community, Anambra State, Nigeria. The platform offers comprehensive information about the community's history, culture, governance, and current news. Features include sections for local news updates, leadership details, community projects, photo galleries, and resources for indigenes and visitors. The site is built for accessibility and to serve as a digital hub for Ihe Nri people worldwide.",
+    image: "https://ihe-nri.com/wp-content/uploads/2024/05/ihe-nri-palace.jpg",
+    technologies: ["WordPress", "PHP", "HTML", "CSS", "JavaScript"],
+    liveUrl: "https://ihe-nri.com",
+    githubUrl: "",
+    date: "2024",
+    featured: true,
+    createdAt: new Date("2024-05-20"),
+  },
+  // New Project 2: Faspay – Bank App Simulation
+  {
+    id: "11",
+    title: "Faspay – Bank App Simulation",
+    description:
+      "A modern digital banking simulation that allows users to experience seamless money management. Faspay features an intuitive dashboard for viewing balances, transaction history, and transferring funds. Users can create virtual accounts, manage cards, and analyze financial activity—all within a secure and responsive web application. Designed with a clean user interface and real-time feedback for a realistic banking experience.",
+    image: "https://faspaybank.vercel.app/faspaylogo.png",
+    technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Node.js"],
+    liveUrl: "https://faspaybank.vercel.app",
+    githubUrl: "",
+    date: "2025",
+    featured: true,
+    createdAt: new Date("2025-10-08"),
+  },
+
 
 ]
 
