@@ -174,7 +174,7 @@ const defaultProjects: Project[] = [
     title: "Faspay – Bank App Simulation",
     description:
       "A modern digital banking simulation that allows users to experience seamless money management. Faspay features an intuitive dashboard for viewing balances, transaction history, and transferring funds. Users can create virtual accounts, manage cards, and analyze financial activity—all within a secure and responsive web application. Designed with a clean user interface and real-time feedback for a realistic banking experience.",
-    image: "https://faspaybank.vercel.app/faspaylogo.png",
+    image: "/images/faspay.png",
     technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Node.js"],
     liveUrl: "https://faspaybank.vercel.app",
     githubUrl: "",
