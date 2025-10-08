@@ -40,7 +40,7 @@ export function ProjectList({ projects, onEdit }: ProjectListProps) {
     return (
       <Card>
         <CardContent className="p-8 text-center">
-          <p className="text-slate-500">No projects found. Create your first project!</p>
+          <p className="text-slate-500">No projects found!. Create your first project!</p>
         </CardContent>
       </Card>
     )
