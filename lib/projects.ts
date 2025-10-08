@@ -43,19 +43,19 @@ const defaultProjects: Project[] = [
     featured: true,
     createdAt: new Date("2023-01-01"),
   },
-  {
-    id: "2",
-    title: "Errand PLUS",
-    description:
-      "A collaborative Errand management application with real-time updates, Hiring of errand runners, becoming an errand runner ,and team collaboration features. Built with PHP, JS and CSS.",
-    image: "https://errandplus.org/assets/images/boxs.avif",
-    technologies: ["REACT", "Node.js", "PHP", "MYSQL", "Express"],
-    liveUrl: "https://errandplus.org",
-    githubUrl: "",
-    date: "2023",
-    featured: true,
-    createdAt: new Date("2023-02-01"),
-  },
+  // {
+  //   id: "2",
+  //   title: "Errand PLUS",
+  //   description:
+  //     "A collaborative Errand management application with real-time updates, Hiring of errand runners, becoming an errand runner ,and team collaboration features. Built with PHP, JS and CSS.",
+  //   image: "https://errandplus.org/assets/images/boxs.avif",
+  //   technologies: ["REACT", "Node.js", "PHP", "MYSQL", "Express"],
+  //   liveUrl: "https://errandplus.org",
+  //   githubUrl: "",
+  //   date: "2023",
+  //   featured: true,
+  //   createdAt: new Date("2023-02-01"),
+  // },
   {
     id: "3",
     title: "Weather Dashboard",
