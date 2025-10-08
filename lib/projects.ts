@@ -160,7 +160,7 @@ const defaultProjects: Project[] = [
     title: "IHE NRI Community Portal",
     description:
       "Official website of Ihe Nri community, Anambra State, Nigeria. The platform offers comprehensive information about the community's history, culture, governance, and current news. Features include sections for local news updates, leadership details, community projects, photo galleries, and resources for indigenes and visitors. The site is built for accessibility and to serve as a digital hub for Ihe Nri people worldwide.",
-    image: "https://ihe-nri.com/wp-content/uploads/2024/05/ihe-nri-palace.jpg",
+    image: "/images/Annotation 2025-10-08 155520.png",
     technologies: ["WordPress", "PHP", "HTML", "CSS", "JavaScript"],
     liveUrl: "https://ihe-nri.com",
     githubUrl: "",
