@@ -8,7 +8,6 @@ import Link from "next/link"
 import Image from "next/image"
 import { getFeaturedProjects } from "@/lib/projects"
 import Typewriter from "@/components/typewriter"
-import FloatingWhatsApp from "@/components/floating-whatsapp"
 
 export default function Home() {
   const [featuredProjects, setFeaturedProjects] = useState<any[]>([])
@@ -51,8 +50,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-mesh">
-      {/* Floating WhatsApp Button */}
-      <FloatingWhatsApp />
 
       {/* Hero Section */}
       <section className="container mx-auto px-4 py-16 md:py-24">
