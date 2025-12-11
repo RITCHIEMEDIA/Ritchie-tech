@@ -28,11 +28,15 @@ export function generateMetadata({
     "Ritchie Tech",
     "Certified Full-Stack Developer",
     "Cloud Solutions Architect",
+    "Mobile App Developer",
+    "CPN/NSQ Certified",
+    "Mobile Application Development",
     "Google Cloud Certified",
     "AWS Certified Developer",
     "Azure Developer",
     "React Expert",
     "Next.js Specialist",
+    "React Native Developer",
     "TypeScript Developer",
     "JavaScript Expert",
     "Enterprise Web Development",
@@ -100,9 +104,9 @@ export const homeMetadata = generateMetadata({
 
 export const aboutMetadata = generateMetadata({
   title: "About Me",
-  description: "Learn about Isaac Elisha (Ritchie Tech) - Certified Full-Stack Developer with Google Cloud, AWS & Azure certifications. BSc Computer Science. Expert in React, Next.js, Node.js, and cloud infrastructure.",
+  description: "Learn about Isaac Elisha (Ritchie Tech) - Certified Full-Stack & Mobile App Developer with CPN/NSQ Level 3, Google Cloud, AWS & Azure certifications. BSc Computer Science. Expert in React, Next.js, React Native, and cloud infrastructure.",
   path: "/about",
-  keywords: ["about", "certifications", "experience", "skills", "education", "cloud certified", "professional developer"],
+  keywords: ["about", "certifications", "experience", "skills", "education", "cloud certified", "professional developer", "mobile app development", "CPN/NSQ", "React Native"],
 })
 
 export const projectsMetadata = generateMetadata({

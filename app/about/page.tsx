@@ -6,6 +6,12 @@ import Link from "next/link"
 
 export default function About() {
   const skills = [
+    // Mobile Development
+    "React Native",
+    "iOS Development",
+    "Android Development",
+    "Mobile App Development",
+    "Flutter",
     // Frontend
     "React",
     "Next.js",
@@ -44,6 +50,14 @@ export default function About() {
   ]
 
   const certifications = [
+    {
+      title: "CPN/NSQ Level 3 in Mobile Application Development",
+      platform: "CPN/NSQ Certification",
+      year: "2024",
+      issuer: "Luzoma Microsystems Limited",
+      certificateId: "CPN/NSQ/24175884",
+      level: "Level 3",
+    },
     {
       title: "Google Associate Cloud Engineer",
       platform: "Google Cloud",
@@ -250,7 +264,7 @@ export default function About() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Award className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-                Certifications
+                Professional Certifications
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -269,6 +283,16 @@ export default function About() {
                     <p className="text-sm text-slate-600 dark:text-slate-400">
                       {cert.issuer || cert.instructor} • {cert.year}
                     </p>
+                    {cert.certificateId && (
+                      <p className="text-xs text-slate-500 dark:text-slate-500 font-mono bg-slate-100 dark:bg-slate-800 px-2 py-1 rounded">
+                        ID: {cert.certificateId}
+                      </p>
+                    )}
+                    {cert.level && (
+                      <span className="inline-block text-xs bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 px-2 py-1 rounded">
+                        {cert.level}
+                      </span>
+                    )}
                   </div>
                 ))}
               </div>

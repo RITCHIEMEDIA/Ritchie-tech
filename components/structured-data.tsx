@@ -47,6 +47,19 @@ export function PersonStructuredData() {
     "hasCredential": [
       {
         "@type": "EducationalOccupationalCredential",
+        "name": "CPN/NSQ Level 3 in Mobile Application Development",
+        "credentialCategory": "certification",
+        "recognizedBy": {
+          "@type": "Organization",
+          "name": "CPN/NSQ - Luzoma Microsystems Limited"
+        },
+        "identifier": "CPN/NSQ/24175884",
+        "dateCreated": "2024-11-03",
+        "competencyRequired": "Mobile Application Development",
+        "educationalLevel": "Level 3"
+      },
+      {
+        "@type": "EducationalOccupationalCredential",
         "name": "Google Associate Cloud Engineer",
         "credentialCategory": "certification",
         "recognizedBy": {
@@ -88,6 +101,10 @@ export function PersonStructuredData() {
       "React",
       "Next.js",
       "Node.js",
+      "Mobile Application Development",
+      "iOS Development",
+      "Android Development",
+      "React Native",
       "Full-Stack Development",
       "Cloud Architecture",
       "Google Cloud Platform",
