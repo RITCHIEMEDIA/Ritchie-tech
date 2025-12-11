@@ -11,14 +11,56 @@ export function PersonStructuredData() {
       "https://www.linkedin.com/in/isaac-elisha-a1701b371",
       "https://wa.me/2349079928298"
     ],
-    "jobTitle": "Full-Stack Developer",
+    "jobTitle": "Certified Full-Stack Developer & Cloud Solutions Architect",
     "worksFor": {
       "@type": "Organization",
       "name": "Ritchie Tech"
     },
-    "description": "Full-Stack Developer building scalable web solutions for businesses and startups. Specializing in React, Next.js, and modern web technologies.",
+    "description": "Certified Full-Stack Developer and Cloud Solutions Architect specializing in scalable enterprise applications. Google Cloud, AWS, and Azure certified professional with expertise in React, Next.js, TypeScript, and modern cloud infrastructure.",
     "email": "ritchietech01@gmail.com",
     "telephone": "+234-907-992-8298",
+    "alumniOf": {
+      "@type": "EducationalOrganization",
+      "name": "Computer Science Program"
+    },
+    "hasCredential": [
+      {
+        "@type": "EducationalOccupationalCredential",
+        "name": "Google Associate Cloud Engineer",
+        "credentialCategory": "certification",
+        "recognizedBy": {
+          "@type": "Organization",
+          "name": "Google Cloud"
+        }
+      },
+      {
+        "@type": "EducationalOccupationalCredential",
+        "name": "AWS Certified Developer - Associate",
+        "credentialCategory": "certification",
+        "recognizedBy": {
+          "@type": "Organization",
+          "name": "Amazon Web Services"
+        }
+      },
+      {
+        "@type": "EducationalOccupationalCredential",
+        "name": "Microsoft Certified: Azure Developer Associate",
+        "credentialCategory": "certification",
+        "recognizedBy": {
+          "@type": "Organization",
+          "name": "Microsoft"
+        }
+      },
+      {
+        "@type": "EducationalOccupationalCredential",
+        "name": "Meta Front-End Developer Professional Certificate",
+        "credentialCategory": "certification",
+        "recognizedBy": {
+          "@type": "Organization",
+          "name": "Meta"
+        }
+      }
+    ],
     "knowsAbout": [
       "JavaScript",
       "TypeScript",
@@ -26,8 +68,16 @@ export function PersonStructuredData() {
       "Next.js",
       "Node.js",
       "Full-Stack Development",
+      "Cloud Architecture",
+      "Google Cloud Platform",
+      "Amazon Web Services",
+      "Microsoft Azure",
+      "Software Engineering",
       "Web Development",
-      "Software Engineering"
+      "Enterprise Applications",
+      "Microservices",
+      "Docker",
+      "Kubernetes"
     ]
   }
 

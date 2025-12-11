@@ -11,28 +11,28 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata: Metadata = {
   metadataBase: new URL("https://isaac-elisha.vercel.app"),
   title: {
-    default: "Isaac Elisha - Full-Stack Developer",
+    default: "Isaac Elisha - Certified Full-Stack Developer & Cloud Architect",
     template: "%s | Isaac Elisha",
   },
   description:
-    "Full-Stack Developer and Computer Science Student passionate about creating innovative web solutions. Specializing in React, Next.js, and modern web technologies.",
-  keywords: ["Isaac Elisha", "Ritchie Tech", "Full-Stack Developer", "React", "Next.js", "Web Development"],
+    "Certified Full-Stack Developer specializing in scalable cloud solutions. Google Cloud, AWS & Azure certified. Expert in React, Next.js, TypeScript, and enterprise web applications.",
+  keywords: ["Isaac Elisha", "Ritchie Tech", "Full-Stack Developer", "Cloud Architect", "React Expert", "Next.js Developer", "Google Cloud Certified", "AWS Certified", "Azure Developer", "TypeScript", "Web Development", "Enterprise Solutions"],
   authors: [{ name: "Isaac Elisha" }],
   creator: "Isaac Elisha",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://isaac-elisha.vercel.app",
-    title: "Isaac Elisha - Full-Stack Developer",
+    title: "Isaac Elisha - Certified Full-Stack Developer & Cloud Architect",
     description:
-      "Full-Stack Developer and Computer Science Student passionate about creating innovative web solutions.",
+      "Certified Full-Stack Developer with Google Cloud, AWS & Azure certifications. Building enterprise-grade web solutions.",
     siteName: "Isaac Elisha Portfolio",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Isaac Elisha - Full-Stack Developer",
+    title: "Isaac Elisha - Certified Full-Stack Developer & Cloud Architect",
     description:
-      "Full-Stack Developer and Computer Science Student passionate about creating innovative web solutions.",
+      "Certified Full-Stack Developer with Google Cloud, AWS & Azure certifications. Building enterprise-grade web solutions.",
   },
   robots: {
     index: true,

@@ -1,8 +1,8 @@
 import type { Metadata } from "next"
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://ritchietech.vercel.app"
-const siteName = "Isaac Elisha - Ritchie Tech"
-const defaultDescription = "Full-Stack Developer building scalable web solutions for businesses and startups. Specializing in React, Next.js, and modern web technologies."
+const siteName = "Isaac Elisha - Certified Full-Stack Developer & Cloud Architect"
+const defaultDescription = "Certified Full-Stack Developer and Cloud Solutions Architect. Google Cloud, AWS & Azure certified. Expert in React, Next.js, TypeScript, and enterprise web applications. Building scalable solutions for businesses."
 const defaultImage = `${baseUrl}/images/ritchie.jpg`
 
 export function generateMetadata({
@@ -26,14 +26,20 @@ export function generateMetadata({
   const defaultKeywords = [
     "Isaac Elisha",
     "Ritchie Tech",
-    "Full-Stack Developer",
-    "Web Developer",
-    "React Developer",
-    "Next.js Developer",
-    "TypeScript",
-    "JavaScript",
-    "Frontend Developer",
-    "Backend Developer",
+    "Certified Full-Stack Developer",
+    "Cloud Solutions Architect",
+    "Google Cloud Certified",
+    "AWS Certified Developer",
+    "Azure Developer",
+    "React Expert",
+    "Next.js Specialist",
+    "TypeScript Developer",
+    "JavaScript Expert",
+    "Enterprise Web Development",
+    "Cloud Architecture",
+    "Scalable Applications",
+    "Microservices",
+    "Full-Stack Engineer",
   ]
 
   return {
@@ -87,30 +93,30 @@ export function generateMetadata({
 // Specific page metadata generators
 export const homeMetadata = generateMetadata({
   title: siteName,
-  description: "Full-Stack Developer building scalable web solutions for businesses and startups. View my portfolio of production-ready applications.",
+  description: "Certified Full-Stack Developer & Cloud Architect. Google Cloud, AWS & Azure certified. Building enterprise-grade applications with React, Next.js, TypeScript. View my portfolio of production-ready solutions.",
   path: "/",
-  keywords: ["portfolio", "web development", "software engineer"],
+  keywords: ["portfolio", "enterprise development", "cloud solutions", "certified developer", "software architect"],
 })
 
 export const aboutMetadata = generateMetadata({
   title: "About Me",
-  description: "Learn more about Isaac Elisha (Ritchie Tech) - Full-Stack Developer with expertise in React, Next.js, Node.js, and modern web technologies.",
+  description: "Learn about Isaac Elisha (Ritchie Tech) - Certified Full-Stack Developer with Google Cloud, AWS & Azure certifications. BSc Computer Science. Expert in React, Next.js, Node.js, and cloud infrastructure.",
   path: "/about",
-  keywords: ["about", "bio", "experience", "skills", "education"],
+  keywords: ["about", "certifications", "experience", "skills", "education", "cloud certified", "professional developer"],
 })
 
 export const projectsMetadata = generateMetadata({
   title: "Projects",
-  description: "Explore my portfolio of full-stack web development projects. From e-commerce platforms to SaaS applications built with React, Next.js, and TypeScript.",
+  description: "Explore my portfolio of enterprise-grade full-stack projects. From e-commerce platforms to SaaS applications and cloud solutions built with React, Next.js, TypeScript, and modern cloud infrastructure.",
   path: "/projects",
-  keywords: ["projects", "portfolio", "web apps", "case studies", "full-stack projects"],
+  keywords: ["projects", "portfolio", "enterprise applications", "case studies", "cloud solutions", "full-stack projects", "production apps"],
 })
 
 export const contactMetadata = generateMetadata({
   title: "Contact Me",
-  description: "Get in touch to discuss your project. Available for freelance work, collaborations, and full-time opportunities.",
+  description: "Get in touch to discuss your project. Available for enterprise consulting, full-time opportunities, and freelance collaborations. Google Cloud, AWS & Azure certified developer.",
   path: "/contact",
-  keywords: ["contact", "hire", "freelance", "collaboration", "opportunities"],
+  keywords: ["contact", "hire", "consulting", "enterprise development", "cloud solutions", "collaboration", "opportunities"],
 })
 
 export function generateProjectMetadata(project: {

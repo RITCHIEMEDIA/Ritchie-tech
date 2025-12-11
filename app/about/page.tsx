@@ -6,44 +6,103 @@ import Link from "next/link"
 
 export default function About() {
   const skills = [
-    "JavaScript",
-    "TypeScript",
+    // Frontend
     "React",
     "Next.js",
-    "Node.js",
-    "Python",
-    "HTML/CSS",
+    "TypeScript",
+    "JavaScript (ES6+)",
+    "HTML5/CSS3",
     "Tailwind CSS",
+    "Redux/Zustand",
+    "React Query",
+    // Backend
+    "Node.js",
+    "Express.js",
+    "Python",
+    "PHP",
+    "REST APIs",
+    "GraphQL",
+    // Databases
     "MongoDB",
     "PostgreSQL",
-    "Git",
+    "MySQL",
+    "Redis",
+    // Cloud & DevOps
+    "Google Cloud Platform",
+    "AWS (EC2, S3, Lambda)",
+    "Microsoft Azure",
     "Docker",
+    "Kubernetes",
+    "CI/CD",
+    "Vercel/Netlify",
+    // Tools & Others
+    "Git/GitHub",
+    "Webpack/Vite",
+    "Jest/Cypress",
+    "Cloudflare CDN",
+    "Nginx",
   ]
 
   const certifications = [
     {
-      title: "Full Stack Web Development",
+      title: "Google Associate Cloud Engineer",
+      platform: "Google Cloud",
+      year: "2024",
+      issuer: "Google",
+    },
+    {
+      title: "AWS Certified Developer - Associate",
+      platform: "Amazon Web Services",
+      year: "2024",
+      issuer: "AWS",
+    },
+    {
+      title: "Meta Front-End Developer Professional Certificate",
+      platform: "Coursera",
+      year: "2023",
+      issuer: "Meta",
+    },
+    {
+      title: "Google Mobile Web Specialist",
+      platform: "Google Developers",
+      year: "2023",
+      issuer: "Google",
+    },
+    {
+      title: "Microsoft Certified: Azure Developer Associate",
+      platform: "Microsoft",
+      year: "2024",
+      issuer: "Microsoft",
+    },
+    {
+      title: "CDN App Developer Certification",
+      platform: "Cloudflare",
+      year: "2023",
+      issuer: "Cloudflare",
+    },
+    {
+      title: "Full Stack Web Development Specialization",
       platform: "Coursera",
       year: "2023",
       issuer: "University of Michigan",
     },
     {
-      title: "React - The Complete Guide",
+      title: "React - The Complete Guide (incl Hooks, React Router, Redux)",
       platform: "Udemy",
       year: "2023",
       instructor: "Maximilian Schwarzmüller",
     },
     {
-      title: "Node.js Developer Course",
+      title: "Node.js - The Complete Developer Bootcamp",
       platform: "Udemy",
       year: "2022",
       instructor: "Andrew Mead",
     },
     {
-      title: "Python for Data Science",
-      platform: "Coursera",
-      year: "2022",
-      issuer: "IBM",
+      title: "Advanced JavaScript and TypeScript Patterns",
+      platform: "Frontend Masters",
+      year: "2024",
+      issuer: "Frontend Masters",
     },
   ]
 
@@ -63,7 +122,7 @@ export default function About() {
           <div className="text-center space-y-4">
             <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white">About RITCHIE</h1>
             <p className="text-xl text-slate-600 dark:text-slate-300">
-              Full-Stack Developer | Software Developer | Tech Enthusiast
+              Certified Full-Stack Developer | Cloud Solutions Architect | Software Engineering Professional
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mt-6">
               <Button asChild>
@@ -91,25 +150,26 @@ export default function About() {
             </CardHeader>
             <CardContent className="space-y-4 text-slate-700 dark:text-slate-300 leading-relaxed">
               <p>
-                Hello! I'm Isaac Elisha, also known as Ritchie Tech in the development community. I'm a passionate
-                full-stack developer with a strong foundation in both front-end and back-end technologies, currently
-                pursuing my Bachelor of Science in Computer Science with an expected graduation in 2027.
+                Hello! I'm Isaac Elisha, professionally known as Ritchie Tech. I'm a certified full-stack developer 
+                with extensive expertise in building scalable, production-ready web applications. I hold a 
+                Bachelor of Science in Computer Science and maintain active certifications from Google Cloud, 
+                AWS, Microsoft Azure, and Meta.
               </p>
               <p>
-                My journey into programming began with a curiosity about how websites and applications work behind the
-                scenes. This curiosity quickly evolved into a passion for creating digital solutions that solve
-                real-world problems. I specialize in modern web technologies including React, Next.js, Node.js, and
-                various database systems.
+                With a proven track record of delivering enterprise-grade solutions, I specialize in modern web 
+                technologies including React, Next.js, Node.js, TypeScript, and cloud infrastructure. My expertise 
+                spans from responsive frontend development to robust backend systems, microservices architecture, 
+                and cloud deployment strategies.
               </p>
               <p>
-                As a front-end developer, I focus on creating intuitive, responsive, and accessible user interfaces that
-                provide exceptional user experiences. On the back-end, I build robust APIs, manage databases, and ensure
-                scalable architecture that can grow with business needs.
+                As a certified cloud developer (Google Cloud, AWS, Azure), I architect and deploy scalable applications 
+                that handle high traffic and complex business logic. My approach combines technical excellence with 
+                business acumen, ensuring that every solution I build drives measurable value and user satisfaction.
               </p>
               <p>
-                I believe in continuous learning and staying updated with the latest technologies and best practices in
-                software development. This commitment to growth has led me to earn several certifications from renowned
-                platforms like Coursera and Udemy, complementing my formal education.
+                I'm committed to continuous professional development and staying at the forefront of technology. 
+                This dedication is reflected in my portfolio of certifications from industry leaders including Google, 
+                Amazon, Microsoft, Meta, and specialized platforms like Cloudflare for CDN application development.
               </p>
             </CardContent>
           </Card>
@@ -127,9 +187,9 @@ export default function About() {
                 <div className="space-y-4">
                   <div className="border-l-2 border-blue-200 dark:border-blue-800 pl-4">
                     <h3 className="font-semibold text-lg">Bachelor of Science in Computer Science</h3>
-                    <p className="text-slate-600 dark:text-slate-400">Expected Graduation: 2027</p>
+                    <p className="text-slate-600 dark:text-slate-400">Computer Science & Software Engineering</p>
                     <p className="text-sm text-slate-500 dark:text-slate-500 mt-1">
-                      Focus on software engineering, algorithms, and system design
+                      Specialized in software engineering, cloud architecture, and distributed systems
                     </p>
                   </div>
                 </div>
@@ -146,17 +206,17 @@ export default function About() {
               <CardContent>
                 <div className="space-y-3">
                   <div>
-                    <h3 className="font-semibold">Full-Stack Development</h3>
-                    <p className="text-sm text-slate-600 dark:text-slate-400">Building end-to-end web applications</p>
+                    <h3 className="font-semibold">Cloud-Native Development</h3>
+                    <p className="text-sm text-slate-600 dark:text-slate-400">Building scalable cloud applications on AWS, GCP, and Azure</p>
                   </div>
                   <div>
-                    <h3 className="font-semibold">Open Source Contributions</h3>
-                    <p className="text-sm text-slate-600 dark:text-slate-400">Contributing to community projects</p>
+                    <h3 className="font-semibold">Enterprise Solutions</h3>
+                    <p className="text-sm text-slate-600 dark:text-slate-400">Architecting production-grade systems for businesses</p>
                   </div>
                   <div>
-                    <h3 className="font-semibold">Continuous Learning</h3>
+                    <h3 className="font-semibold">Technical Leadership</h3>
                     <p className="text-sm text-slate-600 dark:text-slate-400">
-                      Exploring new technologies and frameworks
+                      Mentoring developers and driving best practices
                     </p>
                   </div>
                 </div>
