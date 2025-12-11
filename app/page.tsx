@@ -9,6 +9,7 @@ import Image from "next/image"
 import { getFeaturedProjects } from "@/lib/projects"
 import Typewriter from "@/components/typewriter"
 import FloatingWhatsApp from "@/components/floating-whatsapp"
+import CountingNumber from "@/components/counting-number"
 
 export default function Home() {
   const [featuredProjects, setFeaturedProjects] = useState<any[]>([])
@@ -102,14 +103,14 @@ export default function Home() {
 
           <div className="flex flex-col sm:flex-row gap-4 w-full max-w-2xl animate-fade-in-up delay-600">
             {/* Primary CTA */}
-            <Button asChild className="flex-1 h-12 text-lg hover-lift hover-glow group" size="lg">
+            <Button asChild className="flex-1 h-12 text-lg hover-lift hover-glow ripple-effect group animate-glow" size="lg">
               <Link href="/contact">
                 Let's Work Together
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Link>
             </Button>
             {/* Secondary CTAs */}
-            <Button variant="outline" asChild className="flex-1 h-12 text-lg hover-lift" size="lg">
+            <Button variant="outline" asChild className="flex-1 h-12 text-lg hover-lift ripple-effect animate-glow" size="lg">
               <Link href="/projects">
                 View My Work
               </Link>
@@ -117,13 +118,13 @@ export default function Home() {
           </div>
           
           <div className="flex flex-col sm:flex-row gap-3 w-full max-w-2xl animate-fade-in delay-700">
-            <Button variant="secondary" asChild className="flex-1 hover-lift">
+            <Button variant="secondary" asChild className="flex-1 hover-lift ripple-effect animate-wiggle">
               <Link href={whatsappUrl} target="_blank">
                 <MessageCircle className="mr-2 h-4 w-4" />
                 Chat on WhatsApp
               </Link>
             </Button>
-            <Button variant="secondary" asChild className="flex-1 hover-lift">
+            <Button variant="secondary" asChild className="flex-1 hover-lift ripple-effect animate-wiggle">
               <Link href={resumePath} target="_blank" download="Isaac-Elisha-Resume.pdf">
                 <Download className="mr-2 h-4 w-4" />
                 Download Resume
@@ -132,30 +133,60 @@ export default function Home() {
           </div>
 
           <div className="flex space-x-6 pt-4 animate-fade-in delay-800">
-            <Button variant="ghost" size="icon" asChild className="hover:scale-110 transition-transform">
+            <Button variant="ghost" size="icon" asChild className="hover:scale-110 transition-transform animate-rotate-slow">
               <Link href="https://github.com" target="_blank" rel="noopener noreferrer">
                 <Github className="h-6 w-6" />
                 <span className="sr-only">GitHub</span>
               </Link>
             </Button>
-            <Button variant="ghost" size="icon" asChild className="hover:scale-110 transition-transform">
+            <Button variant="ghost" size="icon" asChild className="hover:scale-110 transition-transform animate-rotate-slow">
               <Link href="https://www.linkedin.com/in/isaac-elisha-a1701b371" target="_blank" rel="noopener noreferrer">
                 <Linkedin className="h-6 w-6" />
                 <span className="sr-only">LinkedIn</span>
               </Link>
             </Button>
-            <Button variant="ghost" size="icon" asChild className="hover:scale-110 transition-transform">
+            <Button variant="ghost" size="icon" asChild className="hover:scale-110 transition-transform animate-rotate-slow">
               <Link href="mailto:ritchietch01@gmail.com">
                 <Mail className="h-6 w-6" />
                 <span className="sr-only">Email</span>
               </Link>
             </Button>
-            <Button variant="ghost" size="icon" asChild className="hover:scale-110 transition-transform">
+            <Button variant="ghost" size="icon" asChild className="hover:scale-110 transition-transform animate-rotate-slow">
               <Link href={whatsappUrl} target="_blank" rel="noopener noreferrer">
                 <MessageCircle className="h-6 w-6" />
                 <span className="sr-only">WhatsApp</span>
               </Link>
             </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section with Counting Numbers */}
+      <section className="container mx-auto px-4 py-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+          <div className="text-center space-y-2 animate-fade-in-up delay-100">
+            <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+              <CountingNumber end={50} suffix="+" />
+            </div>
+            <p className="text-sm text-slate-600 dark:text-slate-400">Projects Completed</p>
+          </div>
+          <div className="text-center space-y-2 animate-fade-in-up delay-200">
+            <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+              <CountingNumber end={11} suffix="+" />
+            </div>
+            <p className="text-sm text-slate-600 dark:text-slate-400">Certifications</p>
+          </div>
+          <div className="text-center space-y-2 animate-fade-in-up delay-300">
+            <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+              <CountingNumber end={5} suffix="+" />
+            </div>
+            <p className="text-sm text-slate-600 dark:text-slate-400">Years Experience</p>
+          </div>
+          <div className="text-center space-y-2 animate-fade-in-up delay-400">
+            <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
+              <CountingNumber end={100} suffix="%" />
+            </div>
+            <p className="text-sm text-slate-600 dark:text-slate-400">Client Satisfaction</p>
           </div>
         </div>
       </section>

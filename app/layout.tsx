@@ -6,6 +6,11 @@ import Navigation from "@/components/navigation"
 import Footer from "@/components/footer"
 import { ThemeProvider } from "@/components/theme-provider"
 import LoadingScreen from "@/components/loading-screen"
+import ScrollProgress from "@/components/scroll-progress"
+import ScrollToTop from "@/components/scroll-to-top"
+import ParticleBackground from "@/components/particle-background"
+import BottomNav from "@/components/bottom-nav"
+import KonamiCode from "@/components/konami-code"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -147,13 +152,18 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <LoadingScreen />
+        <ScrollProgress />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <ParticleBackground density={40} speed={0.3} />
           <a href="#main" className="skip-link sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-blue-600 focus:text-white focus:top-0 focus:left-0">
             Skip to main content
           </a>
           <Navigation />
           <main id="main">{children}</main>
           <Footer />
+          <ScrollToTop />
+          <BottomNav />
+          <KonamiCode />
         </ThemeProvider>
         <expertise-ai client="1dd9c2d1-9de9-455f-930b-f2ecdbff7f40"></expertise-ai>
         <script 
