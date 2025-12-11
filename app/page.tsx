@@ -123,7 +123,7 @@ export default function Home() {
       {/* Quick Overview */}
       <section className="container mx-auto px-4 py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card className="text-center hover-lift glass-strong border-0 animate-fade-in-up delay-100">
+          <Card className="text-center card-interactive glass-strong border-0 animate-fade-in-up delay-100">
             <CardContent className="p-6">
               <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center mx-auto mb-4 animate-float">
                 <span className="text-2xl">💻</span>
@@ -135,7 +135,7 @@ export default function Home() {
             </CardContent>
           </Card>
 
-          <Card className="text-center hover-lift glass-strong border-0 animate-fade-in-up delay-200">
+          <Card className="text-center card-interactive glass-strong border-0 animate-fade-in-up delay-200">
             <CardContent className="p-6">
               <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center mx-auto mb-4 animate-float" style={{animationDelay: '0.5s'}}>
                 <span className="text-2xl">🎓</span>
@@ -147,7 +147,7 @@ export default function Home() {
             </CardContent>
           </Card>
 
-          <Card className="text-center hover-lift glass-strong border-0 animate-fade-in-up delay-300">
+          <Card className="text-center card-interactive glass-strong border-0 animate-fade-in-up delay-300">
             <CardContent className="p-6">
               <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg flex items-center justify-center mx-auto mb-4 animate-float" style={{animationDelay: '1s'}}>
                 <span className="text-2xl">🚀</span>
@@ -171,7 +171,7 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {featuredProjects.slice(0, 2).map((project, idx) => (
-              <Card key={project.id} className="overflow-hidden hover-lift hover-glow group border-0 shadow-lg animate-scale-in" style={{animationDelay: `${idx * 150}ms`}}>
+              <Card key={project.id} className="overflow-hidden card-interactive hover-glow group border-0 shadow-lg animate-scale-in" style={{animationDelay: `${idx * 150}ms`}}>
                 <div className="aspect-video relative bg-slate-200 dark:bg-slate-700 overflow-hidden">
                   <Image
                     src={project.image || "/images/project-placeholder.jpg"}
@@ -185,7 +185,7 @@ export default function Home() {
                 <CardContent className="p-6">
                   <h3 className="text-xl font-bold mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{project.title}</h3>
                   <p className="text-slate-600 dark:text-slate-300 text-sm line-clamp-2 mb-4">{project.description}</p>
-                  <Button asChild size="sm" className="group/btn">
+                  <Button asChild size="sm" className="group/btn hover-lift">
                     <Link href="/projects">
                       View Details
                       <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />

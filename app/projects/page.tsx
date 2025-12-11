@@ -85,18 +85,18 @@ export default function Projects() {
   const otherProjects = projects.filter((project) => !project.featured)
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
+    <div className="min-h-screen bg-mesh">
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-6xl mx-auto space-y-12">
           {/* Header */}
-          <div className="text-center space-y-4">
+          <div className="text-center space-y-4 animate-fade-in-down">
             <div className="flex items-center justify-center gap-4">
-              <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white">My Projects</h1>
+              <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 dark:from-white dark:via-blue-200 dark:to-white bg-clip-text text-transparent animate-gradient">My Projects</h1>
               <Button
                 variant="outline"
                 size="icon"
                 onClick={loadProjects}
-                className="shrink-0"
+                className="shrink-0 hover:scale-110 hover:rotate-180 transition-all duration-500"
                 title="Refresh projects"
               >
                 <RefreshCw className="h-4 w-4" />
@@ -106,33 +106,37 @@ export default function Projects() {
               A collection of projects showcasing my skills in full-stack development, from concept to deployment.
             </p>
             <div className="flex items-center justify-center gap-4 text-sm text-slate-500 dark:text-slate-400">
-              <span>Total Projects: {projects.length}</span>
+              <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 rounded-full">Total Projects: {projects.length}</span>
               <span>•</span>
-              <span>Featured: {featuredProjects.length}</span>
+              <span className="px-3 py-1 bg-green-100 dark:bg-green-900/30 rounded-full">Featured: {featuredProjects.length}</span>
               <span>•</span>
-              <span>Last Updated: {lastUpdated.toLocaleTimeString()}</span>
+              <span className="text-xs">Last Updated: {lastUpdated.toLocaleTimeString()}</span>
             </div>
           </div>
 
           {/* Featured Projects */}
           {featuredProjects.length > 0 && (
             <section>
-              <h2 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-8">Featured Projects</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-8 animate-fade-in-left">Featured Projects</h2>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                {featuredProjects.map((project) => (
-                  <Card key={project.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-                    <div className="aspect-video relative bg-slate-200 dark:bg-slate-700">
+                {featuredProjects.map((project, idx) => (
+                  <Card key={project.id} className="overflow-hidden glass-strong border-0 group card-interactive animate-scale-in" style={{animationDelay: `${idx * 100}ms`}}>
+                    <div className="aspect-video relative bg-slate-200 dark:bg-slate-700 overflow-hidden">
                       <Image
                         src={project.image || "/placeholder.svg?height=300&width=400"}
                         alt={project.title}
                         fill
-                        className="object-cover"
+                        className="object-cover group-hover:scale-110 transition-transform duration-500"
                         unoptimized
                       />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <Badge className="bg-blue-600 text-white border-0">Featured</Badge>
+                      </div>
                     </div>
                     <CardHeader>
                       <div className="flex items-center justify-between">
-                        <CardTitle className="text-xl">{project.title}</CardTitle>
+                        <CardTitle className="text-xl group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{project.title}</CardTitle>
                         <div className="flex items-center gap-1 text-sm text-slate-500">
                           <Calendar className="h-4 w-4" />
                           {project.date}
@@ -143,22 +147,22 @@ export default function Projects() {
                       <p className="text-slate-600 dark:text-slate-300 leading-relaxed">{project.description}</p>
                       <div className="flex flex-wrap gap-2">
                         {project.technologies.map((tech: string) => (
-                          <Badge key={tech} variant="secondary" className="text-xs">
+                          <Badge key={tech} variant="secondary" className="text-xs hover:scale-110 transition-transform">
                             {tech}
                           </Badge>
                         ))}
                       </div>
                       <div className="flex gap-3 pt-2">
                         {project.liveUrl && (
-                          <Button asChild size="sm">
+                          <Button asChild size="sm" className="flex-1 hover-lift group/btn">
                             <Link href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                              <ExternalLink className="h-4 w-4 mr-2" />
+                              <ExternalLink className="h-4 w-4 mr-2 group-hover/btn:rotate-45 transition-transform" />
                               Live Demo
                             </Link>
                           </Button>
                         )}
                         {project.githubUrl && (
-                          <Button variant="outline" size="sm" asChild>
+                          <Button variant="outline" size="sm" asChild className="flex-1 hover-lift">
                             <Link href={project.githubUrl} target="_blank" rel="noopener noreferrer">
                               <Github className="h-4 w-4 mr-2" />
                               Code
@@ -176,22 +180,23 @@ export default function Projects() {
           {/* Other Projects */}
           {otherProjects.length > 0 && (
             <section>
-              <h2 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-8">Other Projects</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-8 animate-fade-in-right">Other Projects</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                {otherProjects.map((project) => (
-                  <Card key={project.id} className="hover:shadow-lg transition-shadow">
-                    <div className="aspect-video relative bg-slate-200 dark:bg-slate-700">
+                {otherProjects.map((project, idx) => (
+                  <Card key={project.id} className="glass-strong border-0 group card-interactive animate-fade-in-up" style={{animationDelay: `${idx * 60}ms`}}>
+                    <div className="aspect-video relative bg-slate-200 dark:bg-slate-700 overflow-hidden">
                       <Image
                         src={project.image || "/placeholder.svg?height=300&width=400"}
                         alt={project.title}
                         fill
-                        className="object-cover"
+                        className="object-cover group-hover:scale-110 transition-transform duration-500"
                         unoptimized
                       />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     </div>
                     <CardHeader className="pb-3">
                       <div className="flex items-center justify-between">
-                        <CardTitle className="text-lg">{project.title}</CardTitle>
+                        <CardTitle className="text-lg group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{project.title}</CardTitle>
                         <div className="flex items-center gap-1 text-sm text-slate-500">
                           <Calendar className="h-4 w-4" />
                           {project.date}
@@ -204,7 +209,7 @@ export default function Projects() {
                       </p>
                       <div className="flex flex-wrap gap-1">
                         {project.technologies.slice(0, 3).map((tech: string) => (
-                          <Badge key={tech} variant="secondary" className="text-xs">
+                          <Badge key={tech} variant="secondary" className="text-xs hover:scale-110 transition-transform">
                             {tech}
                           </Badge>
                         ))}
@@ -216,15 +221,15 @@ export default function Projects() {
                       </div>
                       <div className="flex gap-2 pt-1">
                         {project.liveUrl && (
-                          <Button asChild size="sm" className="flex-1">
+                          <Button asChild size="sm" className="flex-1 hover-lift group/btn">
                             <Link href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                              <ExternalLink className="h-3 w-3 mr-1" />
+                              <ExternalLink className="h-3 w-3 mr-1 group-hover/btn:rotate-45 transition-transform" />
                               Demo
                             </Link>
                           </Button>
                         )}
                         {project.githubUrl && (
-                          <Button variant="outline" size="sm" className="flex-1" asChild>
+                          <Button variant="outline" size="sm" className="flex-1 hover-lift" asChild>
                             <Link href={project.githubUrl} target="_blank" rel="noopener noreferrer">
                               <Github className="h-3 w-3 mr-1" />
                               Code
@@ -254,22 +259,23 @@ export default function Projects() {
           )}
 
           {/* Call to Action */}
-          <section className="text-center py-12">
-            <Card className="max-w-2xl mx-auto">
-              <CardContent className="p-8 space-y-4">
-                <h3 className="text-2xl font-bold text-slate-900 dark:text-white">Interested in Working Together?</h3>
-                <p className="text-slate-600 dark:text-slate-300">
+          <section className="text-center py-12 animate-fade-in-up">
+            <Card className="max-w-2xl mx-auto bg-gradient-to-r from-blue-600 via-blue-700 to-purple-600 dark:from-blue-700 dark:via-blue-800 dark:to-purple-700 border-0 relative overflow-hidden">
+              <div className="absolute inset-0 bg-dot-pattern opacity-10"></div>
+              <CardContent className="p-8 space-y-4 relative z-10">
+                <h3 className="text-2xl font-bold text-white">Interested in Working Together?</h3>
+                <p className="text-blue-100">
                   I'm always open to discussing new opportunities and exciting projects. Let's connect and see how we
                   can create something amazing together.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                  <Button asChild>
+                  <Button asChild variant="secondary" className="hover-lift">
                     <Link href={whatsappUrl} target="_blank" rel="noopener noreferrer">
                       <MessageCircle className="h-4 w-4 mr-2" />
                       Chat on WhatsApp
                     </Link>
                   </Button>
-                  <Button variant="outline" asChild>
+                  <Button variant="outline" asChild className="text-white border-white/30 hover:bg-white/10 hover-lift">
                     <Link href="/contact">Contact Me</Link>
                   </Button>
                 </div>
