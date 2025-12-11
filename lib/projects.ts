@@ -2,7 +2,16 @@
   id: string
   title: string
   description: string
+  shortSummary?: string // One-line summary for cards
+  problem?: string // Problem/challenge context
+  approach?: string // Your approach & key decisions
+  outcome?: string // Results with metrics
+  role?: string // Your role in the project
+  teamSize?: string // Team size (e.g., "Solo", "Team of 4")
+  timeline?: string // Project duration
+  responsibilities?: string[] // Key responsibilities
   image: string
+  screenshots?: string[] // Additional screenshots
   technologies: string[]
   liveUrl: string
   githubUrl: string

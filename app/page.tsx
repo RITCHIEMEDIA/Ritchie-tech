@@ -48,20 +48,33 @@ export default function Home() {
           <div className="space-y-4 max-w-3xl">
             <h1 className="text-4xl md:text-6xl font-bold text-slate-900 dark:text-white">Isaac Elisha</h1>
             <p className="text-xl md:text-2xl text-blue-600 dark:text-blue-400 font-medium">Ritchie Tech</p>
+            <p className="text-2xl md:text-3xl font-semibold text-slate-800 dark:text-slate-100">
+              Full-Stack Developer building scalable web solutions for businesses and startups
+            </p>
             <p className="text-lg md:text-xl text-slate-600 dark:text-slate-300 leading-relaxed">
-              Full-Stack Developer & Computer Science Student passionate about creating innovative web solutions and
-              building the future of technology.
+              Transforming ideas into production-ready applications with React, Next.js, and modern technologies.
+              Specializing in end-to-end web development from concept to deployment.
             </p>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 w-full max-w-2xl">
-            <Button asChild className="flex-1">
-              <Link href="/projects">
-                View My Projects
-                <ArrowRight className="ml-2 h-4 w-4" />
+            {/* Primary CTA */}
+            <Button asChild className="flex-1 h-12 text-lg" size="lg">
+              <Link href="/contact">
+                Let's Work Together
+                <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
-            <Button variant="outline" asChild className="flex-1">
+            {/* Secondary CTAs */}
+            <Button variant="outline" asChild className="flex-1 h-12 text-lg" size="lg">
+              <Link href="/projects">
+                View My Work
+              </Link>
+            </Button>
+          </div>
+          
+          <div className="flex flex-col sm:flex-row gap-3 w-full max-w-2xl">
+            <Button variant="secondary" asChild className="flex-1">
               <Link href={whatsappUrl} target="_blank">
                 <MessageCircle className="mr-2 h-4 w-4" />
                 Chat on WhatsApp
@@ -70,7 +83,7 @@ export default function Home() {
             <Button variant="secondary" asChild className="flex-1">
               <Link href={resumePath} target="_blank" download="Isaac-Elisha-Resume.pdf">
                 <Download className="mr-2 h-4 w-4" />
-                Download CV
+                Download Resume
               </Link>
             </Button>
           </div>
