@@ -5,6 +5,7 @@ import "./globals.css"
 import Navigation from "@/components/navigation"
 import Footer from "@/components/footer"
 import { ThemeProvider } from "@/components/theme-provider"
+import LoadingScreen from "@/components/loading-screen"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -145,6 +146,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
+        <LoadingScreen />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <a href="#main" className="skip-link sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-blue-600 focus:text-white focus:top-0 focus:left-0">
             Skip to main content

@@ -1,15 +1,20 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Github, Linkedin, Mail, ArrowRight, MessageCircle, Phone, Download } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import { getFeaturedProjects } from "@/lib/projects"
+import Typewriter from "@/components/typewriter"
+import FloatingWhatsApp from "@/components/floating-whatsapp"
 
 export default function Home() {
   const [featuredProjects, setFeaturedProjects] = useState<any[]>([])
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const [projectTilt, setProjectTilt] = useState<{[key: string]: {x: number, y: number}}>({})
+  const profileRef = useRef<HTMLDivElement>(null)
 
   // WhatsApp number
   const whatsappNumber = "2349079928298"
@@ -27,14 +32,39 @@ export default function Home() {
     // Load featured projects on client side
     const projects = getFeaturedProjects()
     setFeaturedProjects(projects)
+
+    // Magnetic effect for profile image
+    const handleMouseMove = (e: MouseEvent) => {
+      if (profileRef.current) {
+        const rect = profileRef.current.getBoundingClientRect()
+        const centerX = rect.left + rect.width / 2
+        const centerY = rect.top + rect.height / 2
+        const deltaX = (e.clientX - centerX) * 0.15
+        const deltaY = (e.clientY - centerY) * 0.15
+        setMousePosition({ x: deltaX, y: deltaY })
+      }
+    }
+
+    window.addEventListener('mousemove', handleMouseMove)
+    return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [])
 
   return (
     <div className="min-h-screen bg-mesh">
+      {/* Floating WhatsApp Button */}
+      <FloatingWhatsApp />
+
       {/* Hero Section */}
       <section className="container mx-auto px-4 py-16 md:py-24">
         <div className="flex flex-col items-center text-center space-y-8">
-          <div className="relative animate-fade-in-down">
+          <div 
+            ref={profileRef}
+            className="relative animate-fade-in-down"
+            style={{
+              transform: `translate(${mousePosition.x}px, ${mousePosition.y}px)`,
+              transition: 'transform 0.3s ease-out'
+            }}
+          >
             <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full blur-2xl opacity-20 animate-pulse-slow"></div>
             <Image
               src="/images/ritchie.jpg"
@@ -51,9 +81,19 @@ export default function Home() {
               Isaac Elisha
             </h1>
             <p className="text-xl md:text-2xl text-gradient-blue font-medium animate-fade-in delay-300">Ritchie Tech</p>
-            <p className="text-2xl md:text-3xl font-semibold text-slate-800 dark:text-slate-100 animate-fade-in delay-400">
-              Full-Stack Developer building scalable web solutions for businesses and startups
-            </p>
+            <div className="text-2xl md:text-3xl font-semibold text-slate-800 dark:text-slate-100 animate-fade-in delay-400 min-h-[80px] flex items-center justify-center">
+              <Typewriter 
+                texts={[
+                  "Full-Stack Developer 💻",
+                  "Mobile App Expert 📱",
+                  "Cloud Architect ☁️",
+                  "UI/UX Enthusiast 🎨"
+                ]}
+                typingSpeed={80}
+                deletingSpeed={40}
+                pauseDuration={2000}
+              />
+            </div>
             <p className="text-lg md:text-xl text-slate-600 dark:text-slate-300 leading-relaxed animate-fade-in delay-500">
               Transforming ideas into production-ready applications with React, Next.js, and modern technologies.
               Specializing in end-to-end web development from concept to deployment.
@@ -120,42 +160,97 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Quick Overview */}
+      {/* Bento Grid Features */}
       <section className="container mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card className="text-center card-interactive glass-strong border-0 animate-fade-in-up delay-100">
-            <CardContent className="p-6">
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center mx-auto mb-4 animate-float">
-                <span className="text-2xl">💻</span>
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-4 max-w-6xl mx-auto">
+          {/* Large Feature - Full Stack */}
+          <Card className="md:col-span-4 md:row-span-2 card-interactive glass-strong border-0 animate-fade-in-up delay-100 group overflow-hidden relative">
+            <CardContent className="p-8 h-full flex flex-col justify-between">
+              <div>
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 animate-float group-hover:scale-110 transition-transform">
+                  <span className="text-4xl">💻</span>
+                </div>
+                <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Full-Stack Development</h3>
+                <p className="text-slate-600 dark:text-slate-300 text-lg leading-relaxed">
+                  Building end-to-end web applications with modern technologies. From React frontends to Node.js backends,
+                  I create scalable, production-ready solutions that drive business growth.
+                </p>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Full-Stack Developer</h3>
-              <p className="text-slate-600 dark:text-slate-300">
-                Experienced in both front-end and back-end development with modern technologies
-              </p>
+              <div className="flex flex-wrap gap-2 mt-6">
+                <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium">React</span>
+                <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium">Next.js</span>
+                <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium">Node.js</span>
+                <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium">TypeScript</span>
+              </div>
+              <div className="absolute -right-8 -bottom-8 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-500"></div>
             </CardContent>
           </Card>
 
-          <Card className="text-center card-interactive glass-strong border-0 animate-fade-in-up delay-200">
-            <CardContent className="p-6">
-              <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center mx-auto mb-4 animate-float" style={{animationDelay: '0.5s'}}>
-                <span className="text-2xl">🎓</span>
+          {/* Tall Feature - Certifications */}
+          <Card className="md:col-span-2 md:row-span-2 card-interactive glass-strong border-0 animate-fade-in-up delay-200 group overflow-hidden relative">
+            <CardContent className="p-6 h-full flex flex-col">
+              <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center mb-4 animate-float group-hover:scale-110 transition-transform" style={{animationDelay: '0.5s'}}>
+                <span className="text-3xl">🎓</span>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Certified Developer</h3>
-              <p className="text-slate-600 dark:text-slate-300">
-                BSc Computer Science with Google & AWS Developer Certifications
+              <h3 className="text-2xl font-bold mb-3 bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">Certified Expert</h3>
+              <p className="text-slate-600 dark:text-slate-300 mb-4 flex-grow">
+                BSc Computer Science with professional certifications from industry leaders.
               </p>
+              <div className="space-y-3">
+                <div className="flex items-center gap-2 p-2 bg-green-50 dark:bg-green-900/20 rounded-lg">
+                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">CPN/NSQ Level 3</span>
+                </div>
+                <div className="flex items-center gap-2 p-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                  <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Google Cloud</span>
+                </div>
+                <div className="flex items-center gap-2 p-2 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
+                  <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">AWS Certified</span>
+                </div>
+                <div className="flex items-center gap-2 p-2 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
+                  <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                  <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Azure Developer</span>
+                </div>
+              </div>
+              <div className="absolute -right-4 -top-4 w-24 h-24 bg-green-500/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500"></div>
             </CardContent>
           </Card>
 
-          <Card className="text-center card-interactive glass-strong border-0 animate-fade-in-up delay-300">
+          {/* Wide Feature - Mobile Development */}
+          <Card className="md:col-span-3 card-interactive glass-strong border-0 animate-fade-in-up delay-300 group overflow-hidden relative">
             <CardContent className="p-6">
-              <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg flex items-center justify-center mx-auto mb-4 animate-float" style={{animationDelay: '1s'}}>
-                <span className="text-2xl">🚀</span>
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center flex-shrink-0 animate-float group-hover:scale-110 transition-transform" style={{animationDelay: '1s'}}>
+                  <span className="text-3xl">📱</span>
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-xl font-bold mb-2 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Mobile Apps</h3>
+                  <p className="text-slate-600 dark:text-slate-300 text-sm">
+                    Cross-platform mobile development with React Native for iOS and Android.
+                  </p>
+                </div>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Innovation Focused</h3>
-              <p className="text-slate-600 dark:text-slate-300">
-                Passionate about creating cutting-edge solutions and learning new technologies
-              </p>
+              <div className="absolute -right-4 -bottom-4 w-20 h-20 bg-purple-500/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500"></div>
+            </CardContent>
+          </Card>
+
+          {/* Wide Feature - Cloud Solutions */}
+          <Card className="md:col-span-3 card-interactive glass-strong border-0 animate-fade-in-up delay-400 group overflow-hidden relative">
+            <CardContent className="p-6">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-xl flex items-center justify-center flex-shrink-0 animate-float group-hover:scale-110 transition-transform" style={{animationDelay: '1.5s'}}>
+                  <span className="text-3xl">☁️</span>
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-xl font-bold mb-2 bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">Cloud Architecture</h3>
+                  <p className="text-slate-600 dark:text-slate-300 text-sm">
+                    Scalable cloud solutions on Google Cloud, AWS, and Azure platforms.
+                  </p>
+                </div>
+              </div>
+              <div className="absolute -right-4 -bottom-4 w-20 h-20 bg-cyan-500/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-500"></div>
             </CardContent>
           </Card>
         </div>
@@ -171,28 +266,47 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {featuredProjects.slice(0, 2).map((project, idx) => (
-              <Card key={project.id} className="overflow-hidden card-interactive hover-glow group border-0 shadow-lg animate-scale-in" style={{animationDelay: `${idx * 150}ms`}}>
-                <div className="aspect-video relative bg-slate-200 dark:bg-slate-700 overflow-hidden">
-                  <Image
-                    src={project.image || "/images/project-placeholder.jpg"}
-                    alt={project.title}
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-500"
-                    unoptimized
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                </div>
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-bold mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{project.title}</h3>
-                  <p className="text-slate-600 dark:text-slate-300 text-sm line-clamp-2 mb-4">{project.description}</p>
-                  <Button asChild size="sm" className="group/btn hover-lift">
-                    <Link href="/projects">
-                      View Details
-                      <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
-                    </Link>
-                  </Button>
-                </CardContent>
-              </Card>
+              <div 
+                key={project.id}
+                onMouseMove={(e) => {
+                  const rect = e.currentTarget.getBoundingClientRect()
+                  const x = ((e.clientX - rect.left) / rect.width - 0.5) * 20
+                  const y = ((e.clientY - rect.top) / rect.height - 0.5) * 20
+                  setProjectTilt(prev => ({...prev, [project.id]: {x, y}}))
+                }}
+                onMouseLeave={() => {
+                  setProjectTilt(prev => ({...prev, [project.id]: {x: 0, y: 0}}))
+                }}
+                style={{
+                  transform: projectTilt[project.id] 
+                    ? `perspective(1000px) rotateY(${projectTilt[project.id].x}deg) rotateX(${-projectTilt[project.id].y}deg) scale3d(1.02, 1.02, 1.02)`
+                    : 'none',
+                  transition: 'transform 0.3s ease-out'
+                }}
+              >
+                <Card className="overflow-hidden card-interactive hover-glow group border-0 shadow-lg animate-scale-in h-full" style={{animationDelay: `${idx * 150}ms`}}>
+                  <div className="aspect-video relative bg-slate-200 dark:bg-slate-700 overflow-hidden">
+                    <Image
+                      src={project.image || "/images/project-placeholder.jpg"}
+                      alt={project.title}
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-500"
+                      unoptimized
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                  </div>
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-bold mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{project.title}</h3>
+                    <p className="text-slate-600 dark:text-slate-300 text-sm line-clamp-2 mb-4">{project.description}</p>
+                    <Button asChild size="sm" className="group/btn hover-lift">
+                      <Link href="/projects">
+                        View Details
+                        <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                      </Link>
+                    </Button>
+                  </CardContent>
+                </Card>
+              </div>
             ))}
           </div>
 
