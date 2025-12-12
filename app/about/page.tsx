@@ -136,7 +136,7 @@ export default function About() {
           <div className="text-center space-y-4 animate-fade-in-down">
             <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 dark:from-white dark:via-blue-200 dark:to-white bg-clip-text text-transparent animate-gradient">About RITCHIE</h1>
             <p className="text-xl text-slate-600 dark:text-slate-300">
-              Certified Full-Stack Developer | Cloud Solutions Architect | Software Engineering Professional
+              Certified Full-Stack Developer | Mobile App Developer| Cloud Solutions Architect | Software Engineering Professional
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mt-6">
               <Button asChild className="hover-lift hover-glow group">
@@ -183,7 +183,7 @@ export default function About() {
               <p className="animate-fade-in delay-600">
                 I'm committed to continuous professional development and staying at the forefront of technology. 
                 This dedication is reflected in my portfolio of certifications from industry leaders including Google, 
-                Amazon, Microsoft, Meta, and specialized platforms like Cloudflare for CDN application development.
+                Amazon, Microsoft, Meta, and specialized platforms like Cloudflare for CDN application development, As well as My certification As a Level 3 Mobile App Developer By CPN, and NSQ
               </p>
             </CardContent>
           </Card>
