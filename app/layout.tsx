@@ -129,6 +129,12 @@ export const metadata: Metadata = {
     'geo.placename': 'Owerri',
     'geo.position': '5.4840;7.0351',
   },
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+  },
 }
 
 // Add this type declaration
