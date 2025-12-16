@@ -138,7 +138,7 @@ export default function About() {
             <div className="text-center space-y-4 animate-fade-in-down">
               <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 dark:from-white dark:via-blue-200 dark:to-white bg-clip-text text-transparent animate-gradient">About RITCHIE</h1>
               <p className="text-xl text-slate-600 dark:text-slate-300">
-                Certified Full-Stack Developer | Cloud Solutions Architect | Software Engineering Professional
+                Certified Full-Stack Developer | Mobile App Developer| Cloud Solutions Architect | Software Engineering Professional
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center mt-6">
                 <Button asChild className="hover-lift hover-glow group">
@@ -155,113 +155,6 @@ export default function About() {
                 </Button>
               </div>
             </div>
-
-            {/* Professional Certifications Highlight - SEO Optimized */}
-            <Card className="glass-strong border-0 overflow-hidden relative animate-fade-in-up delay-100">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-full blur-3xl"></div>
-              <CardHeader className="relative">
-                <CardTitle className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
-                    <Award className="h-6 w-6 text-white" />
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Professional Certifications</div>
-                    <div className="text-sm font-normal text-slate-600 dark:text-slate-400 mt-1">Industry-Recognized Credentials</div>
-                  </div>
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {/* CPN/NSQ Certification - Featured */}
-                <div className="p-5 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-950/30 dark:to-emerald-950/30 rounded-xl border-2 border-green-200 dark:border-green-800 animate-scale-in relative overflow-hidden group hover:shadow-lg transition-all">
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-green-500/10 rounded-full blur-2xl group-hover:scale-150 transition-transform"></div>
-                  <div className="relative flex items-start gap-4">
-                    <div className="w-14 h-14 bg-green-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
-                      <span className="text-3xl">🎓</span>
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-start justify-between gap-2 mb-2">
-                        <h3 className="text-lg font-bold text-green-900 dark:text-green-100">CPN/NSQ Level 3 in Mobile Application Development</h3>
-                        <Badge className="bg-green-600 text-white border-0 shadow-md">2024</Badge>
-                      </div>
-                      <p className="text-sm text-green-700 dark:text-green-300 mb-2 font-medium">Luzoma Microsystems Limited • CPN/NSQ Certification</p>
-                      <div className="flex flex-wrap gap-2 items-center">
-                        <span className="inline-flex items-center gap-1 text-xs bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-200 px-3 py-1 rounded-full font-mono">
-                          <Award className="h-3 w-3" />
-                          ID: CPN/NSQ/24175884
-                        </span>
-                        <span className="inline-flex items-center gap-1 text-xs bg-green-600 text-white px-3 py-1 rounded-full font-semibold">
-                          ⭐ Level 3 Certified
-                        </span>
-                        <span className="inline-flex items-center gap-1 text-xs bg-blue-100 dark:bg-blue-900/40 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full">
-                          Mobile App Development
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Cloud Certifications Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  {/* Google Cloud */}
-                  <div className="p-4 bg-white/50 dark:bg-slate-800/50 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-600 transition-all group animate-scale-in" style={{animationDelay: '100ms'}}>
-                    <div className="flex items-center gap-2 mb-3">
-                      <div className="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center">
-                        <span className="text-xl">☁️</span>
-                      </div>
-                      <Badge variant="secondary" className="text-xs">2024</Badge>
-                    </div>
-                    <h4 className="font-bold text-sm mb-1 text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">Google Associate Cloud Engineer</h4>
-                    <p className="text-xs text-slate-600 dark:text-slate-400">Google Cloud Platform</p>
-                  </div>
-
-                  {/* AWS */}
-                  <div className="p-4 bg-white/50 dark:bg-slate-800/50 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-orange-400 dark:hover:border-orange-600 transition-all group animate-scale-in" style={{animationDelay: '150ms'}}>
-                    <div className="flex items-center gap-2 mb-3">
-                      <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center">
-                        <span className="text-xl">📦</span>
-                      </div>
-                      <Badge variant="secondary" className="text-xs">2024</Badge>
-                    </div>
-                    <h4 className="font-bold text-sm mb-1 text-slate-900 dark:text-white group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">AWS Certified Developer</h4>
-                    <p className="text-xs text-slate-600 dark:text-slate-400">Amazon Web Services</p>
-                  </div>
-
-                  {/* Azure */}
-                  <div className="p-4 bg-white/50 dark:bg-slate-800/50 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-purple-400 dark:hover:border-purple-600 transition-all group animate-scale-in" style={{animationDelay: '200ms'}}>
-                    <div className="flex items-center gap-2 mb-3">
-                      <div className="w-10 h-10 bg-purple-500 rounded-lg flex items-center justify-center">
-                        <span className="text-xl">🔷</span>
-                      </div>
-                      <Badge variant="secondary" className="text-xs">2024</Badge>
-                    </div>
-                    <h4 className="font-bold text-sm mb-1 text-slate-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">Azure Developer Associate</h4>
-                    <p className="text-xs text-slate-600 dark:text-slate-400">Microsoft Certified</p>
-                  </div>
-                </div>
-
-                {/* Meta Certification */}
-                <div className="p-4 bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20 rounded-lg border border-blue-200 dark:border-blue-800 animate-scale-in" style={{animationDelay: '250ms'}}>
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
-                      <span className="text-xl">⚛️</span>
-                    </div>
-                    <div className="flex-1">
-                      <h4 className="font-bold text-sm text-slate-900 dark:text-white">Meta Front-End Developer Professional Certificate</h4>
-                      <p className="text-xs text-slate-600 dark:text-slate-400">Meta • Coursera • 2023</p>
-                    </div>
-                    <Badge className="bg-blue-600 text-white border-0">Verified</Badge>
-                  </div>
-                </div>
-
-                {/* View All Button */}
-                <Button variant="outline" className="w-full mt-4 group" asChild>
-                  <a href="#certifications">
-                    <Award className="h-4 w-4 mr-2 group-hover:rotate-12 transition-transform" />
-                    View All {certifications.length} Certifications
-                  </a>
-                </Button>
-              </CardContent>
-            </Card>
 
             {/* Bio Section */}
             <Card className="glass-strong border-0 card-interactive animate-fade-in-up delay-200">
@@ -292,7 +185,7 @@ export default function About() {
                 <p className="animate-fade-in delay-600">
                   I'm committed to continuous professional development and staying at the forefront of technology. 
                   This dedication is reflected in my portfolio of certifications from industry leaders including Google, 
-                  Amazon, Microsoft, Meta, and specialized platforms like Cloudflare for CDN application development.
+                  Amazon, Microsoft, Meta, and specialized platforms like Cloudflare for CDN application development, As well as My certification As a Level 3 Mobile App Developer By CPN, and NSQ
                 </p>
               </CardContent>
             </Card>
