@@ -363,6 +363,55 @@
     animation: glow 2s ease-in-out infinite;
   }
   
+  /* Reduce animation intensity on mobile for better performance */
+  @media (max-width: 768px) {
+    .animate-float {
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    .animate-pulse-slow {
+      animation: pulse-slow 6s ease-in-out infinite;
+    }
+    
+    .animate-gradient {
+      animation-duration: 16s;
+    }
+    
+    .animate-bounce-subtle {
+      animation-duration: 4s;
+    }
+    
+    .animate-rotate-slow {
+      animation-duration: 40s;
+    }
+    
+    .animate-wiggle {
+      animation-duration: 2s;
+    }
+    
+    .animate-glow {
+      animation-duration: 4s;
+    }
+    
+    /* Disable heavy animations on mobile */
+    .bg-mesh::before {
+      animation: spiral-pulse 16s ease-in-out infinite;
+    }
+    
+    /* Reduce animation duration for entrance animations */
+    .animate-fade-in,
+    .animate-fade-in-up,
+    .animate-fade-in-down,
+    .animate-fade-in-left,
+    .animate-fade-in-right {
+      animation-duration: 0.3s;
+    }
+    
+    .animate-scale-in {
+      animation-duration: 0.25s;
+    }
+  }
+  
   /* Delay classes for staggered animations */
   .delay-100 {
     animation-delay: 100ms;

@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef } from "react"
+import { useIsMobile } from '@/hooks/use-mobile'
 
 interface ParticlesProps {
   density?: number
@@ -14,6 +15,7 @@ export default function ParticleBackground({
   color = "rgba(59, 130, 246, 0.4)"
 }: ParticlesProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const isMobile = useIsMobile()
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -40,8 +42,8 @@ export default function ParticleBackground({
       opacity: number
 
       constructor() {
-        this.x = Math.random() * canvas.width
-        this.y = Math.random() * canvas.height
+        this.x = canvas ? Math.random() * canvas.width : 0
+        this.y = canvas ? Math.random() * canvas.height : 0
         this.size = Math.random() * 3 + 1
         this.speedX = (Math.random() - 0.5) * speed
         this.speedY = (Math.random() - 0.5) * speed
@@ -53,10 +55,12 @@ export default function ParticleBackground({
         this.y += this.speedY
 
         // Wrap around screen
-        if (this.x > canvas.width) this.x = 0
-        if (this.x < 0) this.x = canvas.width
-        if (this.y > canvas.height) this.y = 0
-        if (this.y < 0) this.y = canvas.height
+        if (canvas) {
+          if (this.x > canvas.width) this.x = 0
+          if (this.x < 0) this.x = canvas.width
+          if (this.y > canvas.height) this.y = 0
+          if (this.y < 0) this.y = canvas.height
+        }
       }
 
       draw() {
@@ -68,9 +72,10 @@ export default function ParticleBackground({
       }
     }
 
-    // Create particles
+    // Create particles - reduce density on mobile
+    const adjustedDensity = isMobile ? Math.max(10, Math.floor(density * 0.3)) : density
     const particles: Particle[] = []
-    for (let i = 0; i < density; i++) {
+    for (let i = 0; i < adjustedDensity; i++) {
       particles.push(new Particle())
     }
 
