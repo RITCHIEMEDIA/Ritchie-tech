@@ -8,7 +8,6 @@ import Link from "next/link"
 import Image from "next/image"
 import { getFeaturedProjects } from "@/lib/projects"
 import Typewriter from "@/components/typewriter"
-import FloatingWhatsApp from "@/components/floating-whatsapp"
 import CountingNumber from "@/components/counting-number"
 
 export default function Home() {
@@ -52,8 +51,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-mesh">
-      {/* Floating WhatsApp Button */}
-      <FloatingWhatsApp />
+ 
 
       {/* Hero Section */}
       <section className="container mx-auto px-4 py-16 md:py-24">
@@ -103,14 +101,14 @@ export default function Home() {
 
           <div className="flex flex-col sm:flex-row gap-4 w-full max-w-2xl animate-fade-in-up delay-600">
             {/* Primary CTA */}
-            <Button asChild className="flex-1 h-12 text-lg hover-lift hover-glow ripple-effect group animate-glow" size="lg">
+            <Button asChild className="flex-1 h-12 text-lg hover-lift hover-glow ripple-effect group" size="lg">
               <Link href="/contact">
                 Let's Work Together
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Link>
             </Button>
             {/* Secondary CTAs */}
-            <Button variant="outline" asChild className="flex-1 h-12 text-lg hover-lift ripple-effect animate-glow" size="lg">
+            <Button variant="outline" asChild className="flex-1 h-12 text-lg hover-lift ripple-effect" size="lg">
               <Link href="/projects">
                 View My Work
               </Link>
@@ -118,13 +116,13 @@ export default function Home() {
           </div>
           
           <div className="flex flex-col sm:flex-row gap-3 w-full max-w-2xl animate-fade-in delay-700">
-            <Button variant="secondary" asChild className="flex-1 hover-lift ripple-effect animate-wiggle">
+            <Button variant="secondary" asChild className="flex-1 hover-lift ripple-effect">
               <Link href={whatsappUrl} target="_blank">
                 <MessageCircle className="mr-2 h-4 w-4" />
                 Chat on WhatsApp
               </Link>
             </Button>
-            <Button variant="secondary" asChild className="flex-1 hover-lift ripple-effect animate-wiggle">
+            <Button variant="secondary" asChild className="flex-1 hover-lift ripple-effect">
               <Link href={resumePath} target="_blank" download="Isaac-Elisha-Resume.pdf">
                 <Download className="mr-2 h-4 w-4" />
                 Download Resume
@@ -133,25 +131,25 @@ export default function Home() {
           </div>
 
           <div className="flex space-x-6 pt-4 animate-fade-in delay-800">
-            <Button variant="ghost" size="icon" asChild className="hover:scale-110 transition-transform animate-rotate-slow">
+            <Button variant="ghost" size="icon" asChild className="hover:scale-110 transition-transform">
               <Link href="https://github.com" target="_blank" rel="noopener noreferrer">
                 <Github className="h-6 w-6" />
                 <span className="sr-only">GitHub</span>
               </Link>
             </Button>
-            <Button variant="ghost" size="icon" asChild className="hover:scale-110 transition-transform animate-rotate-slow">
+            <Button variant="ghost" size="icon" asChild className="hover:scale-110 transition-transform">
               <Link href="https://www.linkedin.com/in/isaac-elisha-a1701b371" target="_blank" rel="noopener noreferrer">
                 <Linkedin className="h-6 w-6" />
                 <span className="sr-only">LinkedIn</span>
               </Link>
             </Button>
-            <Button variant="ghost" size="icon" asChild className="hover:scale-110 transition-transform animate-rotate-slow">
+            <Button variant="ghost" size="icon" asChild className="hover:scale-110 transition-transform">
               <Link href="mailto:ritchietch01@gmail.com">
                 <Mail className="h-6 w-6" />
                 <span className="sr-only">Email</span>
               </Link>
             </Button>
-            <Button variant="ghost" size="icon" asChild className="hover:scale-110 transition-transform animate-rotate-slow">
+            <Button variant="ghost" size="icon" asChild className="hover:scale-110 transition-transform">
               <Link href={whatsappUrl} target="_blank" rel="noopener noreferrer">
                 <MessageCircle className="h-6 w-6" />
                 <span className="sr-only">WhatsApp</span>

@@ -7,10 +7,10 @@ export default function LoadingScreen() {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    // Hide loading screen after 2 seconds
+    // Hide loading screen after 4 seconds
     const timer = setTimeout(() => {
       setIsLoading(false)
-    }, 2000)
+    }, 4000)
 
     return () => clearTimeout(timer)
   }, [])
@@ -19,16 +19,16 @@ export default function LoadingScreen() {
 
   return (
     <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 animate-fade-out">
-      <div className="text-center space-y-6">
+      <div className="text-center space-y-10">
         {/* Logo with pulse animation */}
-        <div className="relative w-48 h-48 mx-auto animate-pulse-slow">
-          <div className="absolute inset-0 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="relative w-24 h-24 mx-auto animate-pulse-slow">
+          <div className="absolute inset-0 bg-blue-500/20 rounded-full blur-xl animate-pulse"></div>
           <Image
-            src="/images/ritchie-logo.png"
+            src="/images/ritchie-logo.jpg"
             alt="Ritchie Tech Logo"
-            width={192}
-            height={192}
-            className="relative z-10 animate-float"
+            width={96}
+            height={96}
+            className="relative z-10 rounded-full object-cover animate-float"
             priority
           />
         </div>
