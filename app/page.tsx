@@ -20,7 +20,7 @@ export default function Home() {
   const whatsappNumber = "2349079928298"
 
   // Resume path
-  const resumePath = "/resume/isaac-Elisha-Resume.pdf"
+  const resumePath = "/resume/Isaac-Elisha-Resume.pdf"
 
   // WhatsApp message - using correct WhatsApp URL format
   const whatsappMessage = encodeURIComponent(
